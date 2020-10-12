@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00B8D4</color>
+    <color name="colorPrimaryDark">#007FD4</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="profilelayoutcolor">#00B8D4</color>
+    <color name="drawercolor">#0C0F1B</color>
+    <color name="cardcolor">#B71C1C</color>
+    <color name="text_color">#ffff</color>
+    <color name="cart_button_color">#FF9E80</color>
+    <color name="backgroundcolor">#807157</color>
+    <color name="price_color" >#B71C1C</color>
+    <color name="checkall_color">#D5142A</color>
+</resources>

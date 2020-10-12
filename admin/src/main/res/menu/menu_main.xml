@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="image.crystalapps.ekommerceAdmin.MainActivity">
+    <item
+        android:id="@+id/menu_sign_out"
+        android:title="@string/sign_out" />
+
+    <item
+        android:id="@+id/menu_add_items"
+        android:title="@string/add_random_items" />
+</menu>

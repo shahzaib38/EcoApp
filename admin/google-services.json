@@ -1,0 +1,123 @@
+{
+  "project_info": {
+    "project_number": "619783069246",
+    "firebase_url": "https://delicious-food-21577.firebaseio.com",
+    "project_id": "delicious-food-21577",
+    "storage_bucket": "delicious-food-21577.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619783069246:android:4efb8b733741e34f",
+        "android_client_info": {
+          "package_name": "app.crystal.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619783069246-hf49otlnalvhgkse62v01pdbcurnhtq9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.crystal.ecommerce",
+            "certificate_hash": "95c9254ab39933da85d8e1f010a11ad984538e32"
+          }
+        },
+        {
+          "client_id": "619783069246-kqf9p77gebbgq5pu6fo7bi8ohs9rt9fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnBgiiR7w7Jkv8Sh1lOSm-akPsg8TG1P8"
+        },
+        {
+          "current_key": "AIzaSyDBlLRaLB5NxXAG5CR1EZ0rDUSZ6U5WV_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619783069246-kqf9p77gebbgq5pu6fo7bi8ohs9rt9fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619783069246:android:8432c0ec9cd1d178c9fb6f",
+        "android_client_info": {
+          "package_name": "image.crystalapps.ekommerceAdmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619783069246-kqf9p77gebbgq5pu6fo7bi8ohs9rt9fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnBgiiR7w7Jkv8Sh1lOSm-akPsg8TG1P8"
+        },
+        {
+          "current_key": "AIzaSyDBlLRaLB5NxXAG5CR1EZ0rDUSZ6U5WV_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619783069246-kqf9p77gebbgq5pu6fo7bi8ohs9rt9fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619783069246:android:2b561857f03ce14ec9fb6f",
+        "android_client_info": {
+          "package_name": "image.crystalapps.kecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619783069246-fhvuhke6g77b13eeubn6m75u7bjb9djv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "image.crystalapps.kecommerce",
+            "certificate_hash": "95c9254ab39933da85d8e1f010a11ad984538e32"
+          }
+        },
+        {
+          "client_id": "619783069246-kqf9p77gebbgq5pu6fo7bi8ohs9rt9fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnBgiiR7w7Jkv8Sh1lOSm-akPsg8TG1P8"
+        },
+        {
+          "current_key": "AIzaSyDBlLRaLB5NxXAG5CR1EZ0rDUSZ6U5WV_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619783069246-kqf9p77gebbgq5pu6fo7bi8ohs9rt9fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

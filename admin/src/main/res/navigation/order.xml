@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/order"
+    app:startDestination="@id/home2"
+    >
+
+    <fragment
+        android:id="@+id/home2"
+        android:name="image.crystalapps.ekommerceAdmin.ui.mainactivity.fragments.home.Home"
+        android:label="Home" />
+    <fragment
+    android:id="@+id/order2"
+    android:name="image.crystalapps.ekommerceAdmin.ui.mainactivity.fragments.Order"
+    android:label="Order" />
+
+    <fragment
+        android:id="@+id/cart2"
+        android:name="image.crystalapps.ekommerceAdmin.ui.mainactivity.fragments.Cart"
+        android:label="Cart" />
+
+</navigation>

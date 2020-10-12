@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data
+        class ="MainDataBinding"
+        >
+
+        <variable
+            name="viewModel"
+            type="image.crystalapps.kecommerce.ui.mainactivity.MainViewModel" />
+
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/drawercolor"
+        tools:context=".ui.mainactivity.MainActivity"
+        tools:openDrawer="start"
+        >
+
+        <include
+            android:id="@+id/drawercontent"
+            layout="@layout/drawer_content"
+            bind:drawerViewModel="@{viewModel}"
+
+            />
+
+        <include
+
+            android:id="@+id/drawer_navigation"
+            layout="@layout/drawerlayout_navigation"
+            bind:navigationViewModel="@{viewModel}"
+            />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

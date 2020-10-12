@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="drawerViewModel"
+            type="image.crystalapps.kecommerce.ui.mainactivity.MainViewModel" />
+    </data>
+
+    <image.crystalapps.kecommerce.utils.DrawerContent
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/drawerlayoutanimation">
+
+
+        <include layout="@layout/activity_content"/>
+
+    </image.crystalapps.kecommerce.utils.DrawerContent>
+
+</layout>

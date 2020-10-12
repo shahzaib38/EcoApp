@@ -1,0 +1,4 @@
+rootProject.name='KEcommerce'
+include ':app'
+include ':basemodule'
+include ':admin'

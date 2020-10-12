@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="sendNotification"
+            type="image.crystalapps.ekommerceAdmin.ui.notification.SendNotificationBean"/>
+
+
+        <variable name="viewModel"
+            type="image.crystalapps.ekommerceAdmin.ui.notification.SendNotificationViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="image.crystalapps.ekommerceAdmin.ui.notification.SendNotification"
+
+        >
+
+
+        <include
+            layout="@layout/maintoolbar"
+            android:id="@+id/maintoolbar"
+
+            />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/notification_progressbar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:indeterminate="true"
+            android:visibility="invisible"
+
+            />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/sendnotificationtitle"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maintoolbar" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            android:id="@+id/titleeditTextLayout"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="376dp"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxLength="50"
+                android:text="@={viewModel.title}"
+                android:id="@+id/titleeditText"
+                android:textSize="14sp"
+                android:background="@drawable/titlestyle"
+                android:paddingTop="10dp"
+                android:textColor="@color/secondaryTextColor"
+                android:paddingBottom="10dp"
+                android:paddingLeft="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.485"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/maintoolbar" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="Description"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maintoolbar" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="512"
+            android:id="@+id/descriptioneditTextLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="376dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptioneditText"
+                android:textColor="@color/secondaryTextColor"
+                android:background="@drawable/titlestyle"
+                android:text="@={viewModel.description}"
+                android:paddingLeft="8dp"
+                android:maxLength="512"
+                android:textSize="14sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="5dp"
+                android:gravity="left"
+                android:minHeight="150dp"
+                android:maxHeight="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.457"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/maintoolbar" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/sendnotificationbutton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/send_button"
+            android:text="@string/send"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:onClick="@{viewModel::sendNotification}"
+            />
+
+    </LinearLayout>
+</layout>

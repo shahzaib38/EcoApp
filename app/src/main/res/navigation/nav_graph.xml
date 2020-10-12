@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home">
+
+     <fragment android:id="@+id/home"
+         android:label="@string/home"
+         android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.home.Home"
+         />
+
+        <fragment
+                android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.cart.Cart"
+                android:label="@string/cart"
+                android:id="@+id/cart"
+            />
+
+        <fragment
+            android:id="@+id/categories"
+            android:label="@string/categories"
+            android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.categories.Categories"
+            />
+
+    <fragment
+        android:id="@+id/order"
+        android:label="@string/order"
+        android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.order.Order"
+        />
+
+    <fragment
+        android:id="@+id/wish_list"
+        android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.wishlist.WishList"
+        android:label="@string/wish_list" />
+
+
+    <fragment
+        android:id="@+id/sign_out"
+        android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.signout.SignOut"
+        android:label="@string/sign_out"
+        />
+
+
+
+
+
+</navigation>
