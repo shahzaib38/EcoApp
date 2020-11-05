@@ -3,24 +3,26 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.n
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
-import image.crystalapps.ekommercelibraries.ui.base.BaseDialogFragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.InternetDataBinding
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
+import image.crystalapps.kecommerce.ui.base.BaseDialogFragment
 
-class InternetManagerDialogFragment :BaseDialogFragment<InternetViewModel , InternetDataBinding>() , InternetNavigator{
 
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
+@AndroidEntryPoint
+class InternetManagerDialogFragment : BaseDialogFragment<InternetViewModel, InternetDataBinding>() , InternetNavigator{
+
 
       private  var mInternetDataBinding :InternetDataBinding?=null
+
+    private val mViewModel by viewModels<InternetViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mInternetDataBinding=    getViewDataBinding()
-        getViewModel().setNavigator(this)
+        mViewModel.setNavigator(this)
 
 
 
@@ -36,10 +38,7 @@ class InternetManagerDialogFragment :BaseDialogFragment<InternetViewModel , Inte
     override fun getBindingVariable(): Int {
         return BR.viewModel }
 
-    override fun getViewModel(): InternetViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            InternetViewModel::class.java)
-    }
+    override fun getViewModel(): InternetViewModel =mViewModel
 
     override fun getLayoutId(): Int {
         return R.layout.internetconnection

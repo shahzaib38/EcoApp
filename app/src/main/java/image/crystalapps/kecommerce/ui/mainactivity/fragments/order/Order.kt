@@ -2,42 +2,34 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.order
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import image.crystalapps.ekommercelibraries.ui.base.BaseFragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.OrderFragmentBinding
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
+import image.crystalapps.kecommerce.ui.base.BaseFragment
 
 
-class Order : BaseFragment<OrderViewModel , OrderFragmentBinding>() {
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
+@AndroidEntryPoint
+class Order : BaseFragment<OrderViewModel, OrderFragmentBinding>() {
+
 
     private var mOrderFragmentBinding :OrderFragmentBinding?=null
 
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//      mOrderFragmentBinding=  getViewDataBinding()
-//
-//
+    private val mViewModel by viewModels<OrderViewModel>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mOrderFragmentBinding=  getViewDataBinding()
+
+
     }
 
 
-    override fun getViewModel(): OrderViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            OrderViewModel::class.java)    }
+    override fun getViewModel(): OrderViewModel =mViewModel
 
     override fun getBindingVariable(): Int {
         return BR.viewModel

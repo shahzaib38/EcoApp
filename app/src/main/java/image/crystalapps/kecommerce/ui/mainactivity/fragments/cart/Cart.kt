@@ -1,59 +1,86 @@
 package image.crystalapps.kecommerce.ui.mainactivity.fragments.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import image.crystalapps.Products
-import image.crystalapps.ekommercelibraries.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import image.crystala.MainActivity
 import image.crystalapps.kecommerce.BR
+import image.crystalapps.kecommerce.HiltTestActivity
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.CartFragmentBinding
-import image.crystalapps.kecommerce.ui.clothes.ClothesAdapter
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
+import image.crystalapps.kecommerce.model.Cart
+import image.crystalapps.kecommerce.ui.base.BaseFragment
+import image.crystalapps.kecommerce.ui.checkout.CheckOut
 
-class Cart : BaseFragment<CartViewModel ,CartFragmentBinding>() {
+@AndroidEntryPoint
+class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator {
 
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
      private var mCartFragmentBinding :CartFragmentBinding?=null
 
-    val mClothItemCallBack = object : DiffUtil.ItemCallback<Products>(){
-        override fun areItemsTheSame(oldItem: Products, newItem: Products):
-                Boolean =oldItem.productId == newItem.productId
-        override fun areContentsTheSame(oldItem: Products, newItem: Products):
-                Boolean = oldItem==newItem}
+      private val mClothItemCallBack = object : DiffUtil.ItemCallback<Cart>(){
+        override fun areItemsTheSame(oldItem: Cart, newItem: Cart):
+                Boolean =false
+        override fun areContentsTheSame(oldItem: Cart, newItem: Cart):
+                Boolean = oldItem ==newItem }
 
+      private val mViewModel by viewModels<CartViewModel>()
+      private var mainActivity :MainActivity?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mCartFragmentBinding= getViewDataBinding()
+        mCartFragmentBinding = getViewDataBinding()
+        getViewModel().setNavigator(this)
+        if(getBaseActivity() is MainActivity) {
+             mainActivity = getBaseActivity() as MainActivity
+             }else if(getBaseActivity() is HiltTestActivity ){}
 
 
-        getViewModel().allCartLiveDataManager.observe(viewLifecycleOwner, Observer { list ->
-            if(list!=null && list.isNotEmpty()) {
-                val clothesAdapter = CartAdapter(mClothItemCallBack)
-                clothesAdapter.submitList(list)
-                mCartFragmentBinding?.cartRecyclerview?.run {
-                    this.layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    this.adapter = clothesAdapter } }
-        }
+        mViewModel.allCartLiveDataManager.observe(viewLifecycleOwner, allCartObserver)
 
-        )
     }
 
-    override fun getViewModel(): CartViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            CartViewModel::class.java); }
+
+
+
+    override fun getViewModel(): CartViewModel =mViewModel
 
     override fun getBindingVariable(): Int {
         return BR.viewModel }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_cart }
+
+
+
+
+    //Cart callBacks
+   private val allCartObserver = Observer<List<Cart>> {list->
+        if(list!=null ) {
+            val clothesAdapter = CartAdapter(mViewModel,mClothItemCallBack)
+            clothesAdapter.submitList(list)
+
+            mCartFragmentBinding?.run {
+                cartRecyclerview.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                cartRecyclerview.adapter = clothesAdapter
+            }
+           }
+
+
+    }
+
+    override fun checkOut(total: Int, arrayList: ArrayList<Cart>) {
+        val intent = Intent(requireContext() ,CheckOut::class.java)
+        intent.putExtra("array_list" ,arrayList)
+        intent.putExtra("total" ,total)
+        startActivity(intent)
+    }
+
 
 }

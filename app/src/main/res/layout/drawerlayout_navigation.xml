@@ -9,11 +9,7 @@
 
         <variable
             name="navigationViewModel"
-            type="image.crystalapps.kecommerce.ui.mainactivity.MainViewModel"
-            />
-
-
-
+            type="image.crystalapps.kecommerce.ui.mainactivity.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_weight="30"
-            >
+            app:updateProfileContent="@{navigationViewModel.userProfile}">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -55,8 +51,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#F2FFFFFF"
+                android:text="shahzaib lashari"
                 android:textSize="18sp"
-                android:text="@{navigationViewModel._userProfile.displayName}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/profile_image"
                 app:layout_constraintStart_toStartOf="parent"

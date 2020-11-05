@@ -3,11 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
-
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
@@ -19,14 +22,15 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude("META-INF/*.kotlin_module")
     }
+
+
     defaultConfig {
         applicationId "image.crystalapps.kecommerce"
         minSdkVersion 25
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "image.crystalapps.kecommerce.CustomTestRunner"
     }
 
     buildTypes {
@@ -35,9 +39,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     viewBinding { enabled = true }
@@ -67,14 +73,26 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.3.0'
 
-    implementation 'com.google.dagger:dagger-android:2.22'
-    implementation 'com.google.dagger:dagger-android-support:2.22'
-    // if you use the support libraries
-    kapt 'com.google.dagger:dagger-android-processor:2.22'
+    def fragment_version = "1.2.5"
+    // ...
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 
-    implementation 'com.google.dagger:dagger:2.26'
-    kapt 'com.google.dagger:dagger-compiler:2.26'
+
+
+    // Hilt testing
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+    kaptAndroidTest 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+//    implementation 'com.google.dagger:dagger-android:2.22'
+//    implementation 'com.google.dagger:dagger-android-support:2.22'
+//    // if you use the support libraries
+//    kapt 'com.google.dagger:dagger-android-processor:2.22'
+//
+//    implementation 'com.google.dagger:dagger:2.26'
+//    kapt 'com.google.dagger:dagger-compiler:2.26'
 
 
     def lifecycle_version = "2.2.0"
@@ -139,5 +157,14 @@ dependencies {
     androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
     androidTestImplementation "org.robolectric:annotations:$robolectricVersion"
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+
 
 }

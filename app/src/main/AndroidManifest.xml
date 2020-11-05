@@ -12,25 +12,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.productselection.ProductSelectionActivity"></activity>
 
-        <activity android:name=".ui.clothes.ClothesActivity">
+        <activity android:name=".ui.productselection.ProductSelectionActivity"/>
+
+
+
+        <activity android:name=".ui.clothes.ClothesActivity"/>
+
+
+
+
+        <activity android:name=".ui.checkout.CheckOut">
 
         </activity>
 
-        <provider
-            android:name=".contentproviders.BaseContentProvider"
-            android:authorities="crystal.app.permission.PROVIDER"
-            android:enabled="true"
-            android:exported="true" />
 
-        <activity android:name="image.crystala.MainActivity">
-
+        <activity android:name="image.crystala.MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <activity android:name=".ui.filter.FilterActivity">
@@ -38,13 +40,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <service android:name=".services.BaseIntentService" />
-
-        <receiver android:name=".broadcast.BaseBroadCastReciever" />
-
+        <activity android:name=".TestingActivity"/>
         <service
             android:name=".services.FirebaseIdService"
             android:exported="false">

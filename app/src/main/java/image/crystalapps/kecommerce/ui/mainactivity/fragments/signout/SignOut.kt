@@ -2,37 +2,37 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.signout
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import image.crystalapps.ekommercelibraries.ui.base.BaseFragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.BlankDialogBinding
+import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.LogInDialogFragment
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
 
-class SignOut : BaseFragment<SignOutViewModel , BlankDialogBinding>() {
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
+
+@AndroidEntryPoint
+class SignOut : BaseFragment<SignOutViewModel, BlankDialogBinding>() {
+
     private var mSignOutFragmentBinding :BlankDialogBinding?=null
+
+
+    private val mViewModel by viewModels<SignOutViewModel>()
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mSignOutFragmentBinding=     getViewDataBinding()
-
         showLoginDialog()
     }
 
-   fun showLoginDialog(){
+   private fun showLoginDialog(){
        LogInDialogFragment.getInstance().showDialog(requireActivity().supportFragmentManager)
 
    }
 
-    override fun getViewModel(): SignOutViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            SignOutViewModel::class.java)
-
-    }
+    override fun getViewModel(): SignOutViewModel =mViewModel
 
     override fun getBindingVariable(): Int {
         return BR.viewModel

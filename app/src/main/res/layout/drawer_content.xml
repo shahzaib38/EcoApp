@@ -17,8 +17,8 @@
         android:layout_height="match_parent"
         app:layoutDescription="@xml/drawerlayoutanimation">
 
-
-        <include layout="@layout/activity_content"/>
+        <include layout="@layout/activity_content"
+            />
 
     </image.crystalapps.kecommerce.utils.DrawerContent>
 

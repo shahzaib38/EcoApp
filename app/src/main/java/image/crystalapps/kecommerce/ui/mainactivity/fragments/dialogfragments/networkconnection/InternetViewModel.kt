@@ -1,10 +1,12 @@
 package image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.networkconnection
 
-import image.crystalapps.ekommercelibraries.ui.base.BaseViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import image.crystalapps.kecommerce.data.DataManager
-import javax.inject.Inject
+import image.crystalapps.kecommerce.ui.base.BaseViewModel
 
-class InternetViewModel @Inject constructor(dataManager: DataManager) :BaseViewModel<InternetNavigator>(dataManager) {
+
+class InternetViewModel @ViewModelInject constructor(dataManager: DataManager) :
+    BaseViewModel<InternetNavigator>(dataManager) {
 
 
       fun dismissDialog(){

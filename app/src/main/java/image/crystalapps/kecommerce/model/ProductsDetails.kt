@@ -2,8 +2,6 @@ package image.crystalapps.kecommerce.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.util.Size
-import image.crystalapps.kecommerce.utils.Model
 
 data class ProductsDetails(val name: String? = null, val arrayList: ArrayList<Sizes>? = null) :
     Model(), Parcelable {

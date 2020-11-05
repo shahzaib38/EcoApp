@@ -2,23 +2,20 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.categories
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import image.crystalapps.ekommercelibraries.ui.base.BaseFragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.CategoriesFragmentBinding
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
+import image.crystalapps.kecommerce.ui.base.BaseFragment
 
-class Categories : BaseFragment<CategoriesViewModel ,CategoriesFragmentBinding>() {
+@AndroidEntryPoint
+class Categories : BaseFragment<CategoriesViewModel, CategoriesFragmentBinding>() {
 
-
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
 
     private var mCategoriesFragmentBinding:CategoriesFragmentBinding?=null
+    private val mViewModel by viewModels<CategoriesViewModel>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,9 +25,7 @@ class Categories : BaseFragment<CategoriesViewModel ,CategoriesFragmentBinding>(
     }
 
 
-    override fun getViewModel(): CategoriesViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            CategoriesViewModel::class.java)}
+    override fun getViewModel(): CategoriesViewModel =mViewModel
 
     override fun getBindingVariable(): Int {
         return BR.viewModel

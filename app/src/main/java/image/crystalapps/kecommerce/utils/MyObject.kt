@@ -1,6 +1,8 @@
 package image.crystalapps.kecommerce.utils
 
-class MyObject<O:Model> {
+import image.crystalapps.kecommerce.model.Model
+
+class MyObject<O: Model> {
 
 
     lateinit var foo: O

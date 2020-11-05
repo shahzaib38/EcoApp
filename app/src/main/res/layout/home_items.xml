@@ -5,8 +5,8 @@
     <data class="HomeItemDataBinding">
 
         <variable
-            name="demo"
-            type="image.crystalapps.Products" />
+            name="products"
+            type="image.crystalapps.kecommerce.model.Products" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,10 +33,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/default_profile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    productImageUrl="@{products.productImage}"
+                    />
 
 
                 <TextView
@@ -45,7 +47,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Testing"
+                    android:text="@{products.productName}"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +58,14 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Price"
+                    android:text="@{String.valueOf(products.productPrice)}"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

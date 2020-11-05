@@ -151,4 +151,14 @@
         <item>@string/sort_by_price</item>
     </string-array>
 
+
+    <!--- Price High To Low -->
+     <string name="price_highToLow">Price (High To Low)</string>
+     <string name="price_lowToHigh">Price (Low To High)</string>
+    <string name="rating_highToLow">Rating High to Low</string>
+    <string name="user_name_hint">User Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="profile_email">Email</string>
+    <string name="address">Address</string>
+
 </resources>

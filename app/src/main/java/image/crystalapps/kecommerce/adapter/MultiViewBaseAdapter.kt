@@ -5,13 +5,9 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import image.crystalapps.kecommerce.utils.Model
+import image.crystalapps.kecommerce.model.Model
 
 abstract class MultiViewBaseAdapter< M : Model, VDB: ViewDataBinding>(diffUtil: DiffUtil.ItemCallback<M>) : ListAdapter<M, BaseViewHolder<VDB>>(diffUtil) {
-
-
-    //  open var items: List<M>? = ArrayList()
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<VDB> {

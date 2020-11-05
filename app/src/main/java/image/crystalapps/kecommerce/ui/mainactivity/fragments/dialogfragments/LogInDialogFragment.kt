@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,29 +16,25 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import image.crystala.MainActivity
-import image.crystalapps.ekommercelibraries.ui.base.BaseDialogFragment
 import image.crystalapps.kecommerce.R
-
-
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-
-import javax.inject.Inject
 import image.crystalapps.kecommerce.BR
-import image.crystalapps.kecommerce.data.database.prefs.SaveTokenSharedPreferenceHelper
 import image.crystalapps.kecommerce.databinding.LoginDialogBinding
 import image.crystalapps.kecommerce.databinding.snackBarSetup
+import image.crystalapps.kecommerce.ui.base.BaseDialogFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.networkconnection.InternetManagerDialogFragment
 
-class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBinding>()  ,LogInNavigator{
 
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
+@AndroidEntryPoint
+class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBinding>()  ,LogInNavigator{
 
     private var mFirebaseAuthenticationDialogBinding: LoginDialogBinding?=null
     private lateinit var googleSignInClient: GoogleSignInClient
     private  lateinit var mFirebaseAuth :FirebaseAuth
     private lateinit var mMainActivity : MainActivity
+
+    private val mViewModel by viewModels<LogInViewModel>()
 
 
     override fun getBindingVariable(): Int {
@@ -48,11 +43,14 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-       getViewModel().setNavigator(this)
+        mViewModel.setNavigator(this)
         mFirebaseAuthenticationDialogBinding = getViewDataBinding()
 
-       mMainActivity= getBaseActivity() as MainActivity
-
+        if(getBaseActivity() is MainActivity) {
+            mMainActivity = getBaseActivity() as MainActivity
+        }else{
+            throw ClassCastException("Login Dialog Fragment is null")
+        }
 
 
         mFirebaseAuthenticationDialogBinding?.root?.
@@ -79,11 +77,7 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
         }
     }
 
-    override fun getViewModel(): LogInViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            LogInViewModel::class.java)
-
-    }
+    override fun getViewModel(): LogInViewModel =mViewModel
 
     override fun getLayoutId(): Int {
         return R.layout.firebase_authentication_dialog }

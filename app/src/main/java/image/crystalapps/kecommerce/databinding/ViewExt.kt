@@ -14,13 +14,12 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import de.hdodenhof.circleimageview.CircleImageView
-import image.crystala.MainActivity
-import image.crystalapps.Products
+import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.adapter.CategoriesListAdapter
 import image.crystalapps.kecommerce.data.Event
 import image.crystalapps.kecommerce.model.Categories
-import image.crystalapps.kecommerce.ui.clothes.ClothesAdapter
+import image.crystalapps.kecommerce.model.UserProfile
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.Home
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.InnerAdapter
 import kotlinx.android.synthetic.main.drawerlayout_navigation.view.*
@@ -29,7 +28,8 @@ import kotlinx.android.synthetic.main.drawerlayout_navigation.view.*
 fun View.snackBarSetup(lifecycleOwner: LifecycleOwner, snackBarEvent :LiveData<Event<Int>>, length :Int){
     snackBarEvent.observe(lifecycleOwner,Observer<Event<Int>>{event->
         event.getContentIfNotHandled()?.let {
-            showSnackBar( context.getString(it),length) } })
+            showSnackBar( context.getString(it),length) }?:throw NullPointerException("SnackBarSetup is null")
+    })
 }
 
 
@@ -37,22 +37,28 @@ fun View.showSnackBar(snackBarText :String ,length :Int){
     Snackbar.make(this ,snackBarText ,length).show() }
 
 @BindingAdapter("updateProfileContent")
-fun View.setProfileContent(userProfile : FirebaseUser?)
+fun View.setProfileContent(userProfile : UserProfile?)
 {
-    Toast.makeText(context ,userProfile?.displayName ,Toast.LENGTH_LONG).show()
+
+    Toast.makeText(this.context ,"Testing" ,Toast.LENGTH_LONG).show()
 
     val image = profile_image
     val  text =profile_text
     if (userProfile!=null){
         image.run {
-            Glide.with(context).load(userProfile.photoUrl).into(this) }
+            Glide.with(context).load(userProfile.userImageUrl).into(this) }
         text.run {
-            this.text =userProfile.displayName }
+            this.text =userProfile.username }
     }else{
         image.run {
                 Glide.with(context).load(R.drawable.default_profile).into(this) }
         text.run {
-            this.text = resources.getString(R.string.user_name) } } }
+            this.text = resources.getString(R.string.user_name) }
+
+
+    }
+
+}
 
 
 @BindingAdapter("setImageUrl")
@@ -74,7 +80,7 @@ fun setImageUrl(circleImageView: CircleImageView ,uri :Uri?){
 fun View.setUpRecyclerView(home:Home,recyclerView: RecyclerView ,list :List<Categories>?){
    val mAdapter = CategoriesListAdapter(home ,diffCallback)
     mAdapter.submitList(list)
-    if (list!=null && list.isNotEmpty()) {
+    if (list!=null ) {
         val mLinearLayoutManager =
             LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.apply {
@@ -82,7 +88,7 @@ fun View.setUpRecyclerView(home:Home,recyclerView: RecyclerView ,list :List<Cate
             itemAnimator = DefaultItemAnimator()
             adapter = mAdapter
         }
-    }
+    }else throw NullPointerException("Category List is null or Empty")
 }
 
 
@@ -108,14 +114,14 @@ fun View.setUpRecyclerView(home:Home,recyclerView: RecyclerView ,list :List<Cate
 
 
 //CallBacks
-val itemCallBack = object :DiffUtil.ItemCallback<image.crystalapps.Products>(){
+val itemCallBack = object :DiffUtil.ItemCallback<Products>(){
     override fun areItemsTheSame(
-        oldItem: image.crystalapps.Products,
-        newItem: image.crystalapps.Products
+        oldItem: Products,
+        newItem: Products
     ): Boolean =false
     override fun areContentsTheSame(
-        oldItem: image.crystalapps.Products,
-        newItem: image.crystalapps.Products
+        oldItem: Products,
+        newItem: Products
     ): Boolean =false
 
 
@@ -134,14 +140,14 @@ private val diffCallback = object : DiffUtil.ItemCallback<Categories>() {
 
 
 //Cloth CallBack
-val clothItemCallBack = object : DiffUtil.ItemCallback<image.crystalapps.Products>(){
+val clothItemCallBack = object : DiffUtil.ItemCallback<Products>(){
     override fun areItemsTheSame(
-        oldItem: image.crystalapps.Products,
-        newItem: image.crystalapps.Products
+        oldItem: Products,
+        newItem: Products
     ): Boolean =false
     override fun areContentsTheSame(
-        oldItem: image.crystalapps.Products,
-        newItem: image.crystalapps.Products
+        oldItem: Products,
+        newItem: Products
     ): Boolean =false
 
 
@@ -149,14 +155,15 @@ val clothItemCallBack = object : DiffUtil.ItemCallback<image.crystalapps.Product
 
 //Cloth List
 @BindingAdapter("clothList")
-fun setClothList(recyclerView: RecyclerView ,list :List<image.crystalapps.Products>?){
-    if (list!=null && list.isNotEmpty()) {
+fun setClothList(recyclerView: RecyclerView ,list :List<Products>?){
+    if (list!=null ) {
         val innerAdapter = InnerAdapter(clothItemCallBack)
         innerAdapter.submitList(list)
         recyclerView.run {
-            this.layoutManager = GridLayoutManager(context, 2)
+            this.layoutManager = GridLayoutManager(context, 3)
             this.adapter = innerAdapter
-        } }
+        }
+         } else throw NullPointerException("Cloth List is null")
 
 }
 

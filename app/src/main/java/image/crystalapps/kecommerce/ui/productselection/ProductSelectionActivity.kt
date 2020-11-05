@@ -3,53 +3,67 @@ package image.crystalapps.kecommerce.ui.productselection
 import android.os.Build
 import android.os.Bundle
 import androidx.core.view.ViewCompat
-import androidx.lifecycle.ViewModelProvider
 import android.transition.Transition
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import image.crystalapps.Products
-import image.crystalapps.ekommercelibraries.ui.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
+import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.ProductDataBinding
+import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
+import image.crystalapps.kecommerce.ui.base.BaseActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.LogInDialogFragment
 import image.crystalapps.kecommerce.utils.OnItemClickListener
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
 
-class ProductSelectionActivity : BaseActivity<ProductViewModel , ProductDataBinding>()  ,OnItemClickListener<Sizes>,SelectionNavigator {
+@AndroidEntryPoint
+class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBinding>()  ,OnItemClickListener<Sizes>,SelectionNavigator {
 
 
     companion object {
         val IMAGE_HEADER = "image:header"
     }
 
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
+
     private var mProductSelectionDataBinding :ProductDataBinding?=null
 
     override fun getBindingVariable(): Int =BR.viewModel
     override fun getLayoutId(): Int = R.layout.activity_product_selection
-    override fun getViewModel(): ProductViewModel = ViewModelProvider(this, mViewModelProviderFactory).get(ProductViewModel::class.java)
-     private lateinit var product :Products
+
+
+    private val mViewModel by viewModels<ProductViewModel>()
+
+
+    override fun getViewModel(): ProductViewModel = mViewModel
+     private lateinit var product : Products
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mProductSelectionDataBinding = getViewDataBinding()
 
-        getViewModel().setNavigator(this)
-        mProductSelectionDataBinding?.run {
+        mViewModel.setNavigator(this)
+    //    mProductSelectionDataBinding?.run {
             product = intent.getParcelableExtra<Products>("parcel")
-            ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
-        }
+
+     // val parcel=             intent.getStringExtra("parcel")
+
+  //      if(parcel.isNotEmpty()){
+       //     Toast.makeText(this ,parcel ,Toast.LENGTH_LONG).show()
+//        }else{
+//
+//            throw NullPointerException("Parcel is null")
+//        }
+
+            //    ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
+   //     }?:throw ClassCastException("Product Activity Binding is null")
 
         loadItem()
     }
@@ -132,7 +146,8 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel , ProductDataBind
         if(Firebase.auth.currentUser !=null){
             Toast.makeText(this ,"Added to Cart",Toast.LENGTH_LONG).show()
 
-            getViewModel().addToCart(product)
+
+            mViewModel.addToCart(Cart(1,product))
 
         }
 

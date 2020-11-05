@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import image.crystalapps.Products
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.adapter.BaseAdapter
 import image.crystalapps.kecommerce.databinding.ProductInnerDataBinding

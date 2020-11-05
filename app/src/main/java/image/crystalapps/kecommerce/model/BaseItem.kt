@@ -2,9 +2,8 @@ package image.crystalapps.kecommerce.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import image.crystalapps.kecommerce.utils.Model
 
- open class BaseItem() : Model(), Parcelable {
+open class BaseItem() : Model(), Parcelable {
     constructor(source: Parcel) : this(
     )
 

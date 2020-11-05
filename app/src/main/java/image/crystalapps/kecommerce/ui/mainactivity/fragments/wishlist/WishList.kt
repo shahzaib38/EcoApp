@@ -2,32 +2,30 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.wishlist
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import image.crystalapps.ekommercelibraries.ui.base.BaseFragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.WishListFragmentBinding
-import image.crystalapps.kecommerce.viewmodel.ViewModelProviderFactory
-import javax.inject.Inject
+import image.crystalapps.kecommerce.ui.base.BaseFragment
 
 
-class WishList : BaseFragment<WishListViewModel ,WishListFragmentBinding>() {
+@AndroidEntryPoint
+class WishList : BaseFragment<WishListViewModel, WishListFragmentBinding>() {
 
-    @Inject
-    lateinit var mViewModelProviderFactory: ViewModelProviderFactory
 
     private var mWishListFragmentBinding:WishListFragmentBinding?=null
+
+
+    private val mViewModel by viewModels<WishListViewModel>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mWishListFragmentBinding= getViewDataBinding() }
 
 
-    override fun getViewModel(): WishListViewModel {
-        return ViewModelProvider(this, mViewModelProviderFactory).get(
-            WishListViewModel::class.java)
-
-    }
+    override fun getViewModel(): WishListViewModel =mViewModel
 
     override fun getBindingVariable(): Int {
         return BR.viewModel }

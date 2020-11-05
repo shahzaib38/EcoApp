@@ -16,62 +16,37 @@ class InstanceIdManager @Inject constructor()  {
 
 
 
-  fun   registerInstanceIdManager(firebaseAuth : FirebaseAuth, newToken :String?){
-      println("Checking first")
-
+  fun registerInstanceIdManager(firebaseAuth : FirebaseAuth, newToken :String?){
       val mCurrentUser= firebaseAuth.currentUser ?: return
-
-      println("Checking")
        val userCollection= Firebase.firestore.collection(FirebaseUtils.USER_COLLECTION)
        val userDocuments=  userCollection.document(mCurrentUser.uid)
 
-      userDocuments.get().addOnCompleteListener( object :OnCompleteListener<DocumentSnapshot>{
-          override fun onComplete(task: Task<DocumentSnapshot>) {
-              if (task.isSuccessful){
-                  val documentResult  =   task.result
-                  if (documentResult!=null){
-                      if (documentResult.exists()){
-                          val resultMap =       documentResult.data
-                          if (resultMap!=null) {
-                           val result=resultMap["fcmTokens"]
+      userDocuments.get().addOnCompleteListener { task ->
+          if (task.isSuccessful){
+              val documentResult  =   task.result
+              if (documentResult!=null){
+                  if (documentResult.exists()){
+                      val resultMap =       documentResult.data
+                      if (resultMap!=null) {
+                          val result=resultMap["fcmTokens"]
                           val hashMap=     hashMapOf<String,Any>()
-                              val token =newToken?:""
+                          val token =newToken?:""
                           val arrayList=      arrayListOf(token)
                           hashMap.put("fcmTokens" ,arrayList )
-                          userDocuments.update(hashMap) } }
-
-                      else{
-
+                          userDocuments.update(hashMap) } else throw NullPointerException("InstanceIdManager Register Instance Id ResultMap is null")
+                  } else{
                       val hashMap=     hashMapOf<String,Any>()
-                          val token =newToken?:""
+                      val token =newToken?:""
                       val arrayList=      arrayListOf(newToken)
                       hashMap.put("fcmTokens" ,arrayList )
-                      userDocuments.set(hashMap)
-                  }
+                      userDocuments.set(hashMap) }
 
-
-
-
-              }else{
-                  println("exception")
-
-              }
-              }
-
-
+              } else throw NullPointerException("InstanceIdManager Document Result is null")
           }
-
-
       }
-      )
 
 
-
-
-
-
-
-      }
+  }
 
 
 

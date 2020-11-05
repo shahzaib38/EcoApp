@@ -8,7 +8,16 @@
      <fragment android:id="@+id/home"
          android:label="@string/home"
          android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.home.Home"
-         />
+         >
+
+         <action android:id="@+id/From_Home_To_ClothActivity"
+             app:destination="@id/clothesactivity"
+
+             />
+
+
+
+     </fragment>
 
         <fragment
                 android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.cart.Cart"
@@ -26,7 +35,23 @@
         android:id="@+id/order"
         android:label="@string/order"
         android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.order.Order"
-        />
+        >
+
+
+    </fragment>
+
+
+    <activity android:id="@+id/clothesactivity"
+        android:label="CLothes Activity"
+        android:name="image.crystalapps.kecommerce.ui.clothes.ClothesActivity">
+
+        <argument android:name="productdata"
+            app:argType="string"
+            android:defaultValue="hello"
+            />
+
+    </activity>
+
 
     <fragment
         android:id="@+id/wish_list"
@@ -38,6 +63,12 @@
         android:id="@+id/sign_out"
         android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.signout.SignOut"
         android:label="@string/sign_out"
+        />
+
+
+    <fragment android:id="@+id/profile_fragment"
+        android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.profile.Profile"
+        android:label="Profile"
         />
 
 

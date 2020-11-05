@@ -1,26 +1,68 @@
 package image.crystalapps.kecommerce.ui.mainactivity
 
+import android.view.View
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import image.crystalapps.Products
-import image.crystalapps.ekommercelibraries.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.data.Event
+import image.crystalapps.kecommerce.model.UserProfile
+import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.utils.Result
-import javax.inject.Inject
 import kotlinx.coroutines.launch
 
-class MainViewModel @Inject constructor(val dataManager: DataManager ):
+class MainViewModel @ViewModelInject constructor(val dataManager: DataManager ):
     BaseViewModel<MainNavigator>(dataManager) {
 
 
+    //   val product =Transformations.switchMap(  allProductsLiveData,dataManager.getAllProducts().value)
 
- //   val product =Transformations.switchMap(  allProductsLiveData,dataManager.getAllProducts().value)
+    val mUserProfileUpdate = MutableLiveData<UserProfile>()
+    val mUpdateEvent = MutableLiveData<Boolean>(false)
+    val _userProfile = MutableLiveData<Boolean>(false)
 
 
-    val mUpdateEvent =MutableLiveData<Boolean>(false)
+    val username =MutableLiveData<String>("")
+
+
+    fun submit(){
+
+
+    }
+
+
+    fun submitButton(){
+        println(username.value)
+
+    }
+
+
+
+    fun openProfileDialog(view : View){
+        getNavigator().openProfileDialog(view) }
+
+
+    fun getUserProfile():LiveData<UserProfile> {
+  return  dataManager.getUserProfile("7m5pHZ89AecrwnlLKjuoLlZfpMh1").distinctUntilChanged().switchMap {
+        data->
+        filterUserProfileData(data)
+    }
+}
+
+    private fun filterUserProfileData(data: Result<UserProfile>): LiveData<UserProfile> {
+        val result =MutableLiveData<UserProfile>()
+        if (data is Result.Success){
+            println("Success")
+            //   viewModelScope.launch {
+        val username=    data.data.username
+
+            result.value = data.data }
+
+        return result
+    }
+
 
     val allProductsLiveData =mUpdateEvent.switchMap {
        dataManager.getAllProducts().distinctUntilChanged().switchMap {
@@ -28,6 +70,9 @@ class MainViewModel @Inject constructor(val dataManager: DataManager ):
      }
 
     }
+
+
+
 
 
    private fun filterData(data : Result<List<Products>>) : LiveData<List<Products>> {
@@ -63,8 +108,6 @@ class MainViewModel @Inject constructor(val dataManager: DataManager ):
             println(Thread.currentThread().name) } }
 
    //UserProfile LiveData
-     val _userProfile =MutableLiveData<FirebaseUser>()
-    val userProfile=_userProfile
 
     //LiveData
     val _snackBarText = MutableLiveData<Event<Int>>()
@@ -80,7 +123,7 @@ class MainViewModel @Inject constructor(val dataManager: DataManager ):
            val mCurrentUser=     googleAuthentication.currentUser
 
            if (mCurrentUser!=null) {
-               _userProfile.value = mCurrentUser
+           //    _userProfile.value = mCurrentUser
                _snackBarText.value = Event(R.string.successfull_login)
                    dataManager.registerInstanceIdManager(token)
 

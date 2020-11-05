@@ -1,13 +1,13 @@
 package image.crystalapps.kecommerce.utils
 
-import android.net.nsd.NsdManager
 import androidx.lifecycle.LiveData
 import com.google.firebase.firestore.*
-import image.crystalapps.kecommerce.ui.Demo
-import io.reactivex.rxjava3.kotlin.toObservable
-import kotlin.reflect.KClass
+import image.crystalapps.kecommerce.model.Clothes
+import image.crystalapps.kecommerce.model.Model
+import image.crystalapps.kecommerce.model.Products
+import image.crystalapps.kecommerce.ui.clothes.CLothesNavigator
 
-class QueryLiveData<M :Model>(val query: Query, val type : Class<M>) :LiveData<Result<MutableList<M>>>() ,
+class QueryLiveData<M : Model>(val query: Query, val type : Class<M>) :LiveData<Result<MutableList<M>>>() ,
     EventListener<QuerySnapshot> {
     private var register : ListenerRegistration?=null
     override fun onActive() {
@@ -27,6 +27,8 @@ class QueryLiveData<M :Model>(val query: Query, val type : Class<M>) :LiveData<R
             return }
         if (querySnapShot!=null){
             println("Wokring Firebase ")
+
+
             value =Result.Success(createList(querySnapShot.documents)) }
     }
 
@@ -35,9 +37,10 @@ class QueryLiveData<M :Model>(val query: Query, val type : Class<M>) :LiveData<R
         println("Create List")
         for (document in documents){
             val model=    document.toObject(type)
-            println("Model Object ${document.get("productName")}")
             if (model!=null){
-                list.add(model) } }
+                list.add(model) }
+
+        }
         return list
     }
 

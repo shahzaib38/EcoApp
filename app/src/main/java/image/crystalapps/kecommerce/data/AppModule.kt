@@ -10,6 +10,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import image.crystalapps.kecommerce.data.database.LocalDataBaseImpl
 import image.crystalapps.kecommerce.data.database.LocalDataBaseManager
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
@@ -24,7 +26,8 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-  class AppModule {
+@InstallIn(ApplicationComponent::class)
+class AppModule {
 
 
   @Provides

@@ -1,17 +1,11 @@
 package image.crystalapps.kecommerce.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.CategoriesListDataBinding
-import image.crystalapps.kecommerce.databinding.itemCallBack
 import image.crystalapps.kecommerce.model.Categories
 import image.crystalapps.kecommerce.utils.OnItemClickListener
 

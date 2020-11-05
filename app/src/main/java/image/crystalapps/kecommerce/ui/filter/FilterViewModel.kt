@@ -1,7 +1,9 @@
 package image.crystalapps.kecommerce.ui.filter
 
-import image.crystalapps.ekommercelibraries.ui.base.BaseViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import image.crystalapps.kecommerce.data.DataManager
+import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import javax.inject.Inject
 
-class FilterViewModel @Inject constructor(val dataManager :DataManager):BaseViewModel<FilterNavigator>(dataManager)
+class FilterViewModel @ViewModelInject constructor(val dataManager :DataManager):
+    BaseViewModel<FilterNavigator>(dataManager)

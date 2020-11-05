@@ -6,8 +6,16 @@
         <item name="colorPrimary">@color/profilelayoutcolor</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#fff</item>
+        <item name="windowNoTitle">true</item>
+
     </style>
 
+    <style name="Rating" parent="Theme.AppCompat">
+
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlActivated">#FFE57F</item>
+
+    </style>
 
     <style name="AppTheme.Title">
         <item name="android:fontFamily">sans-serif-medium</item>

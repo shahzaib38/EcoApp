@@ -1,19 +1,14 @@
 package image.crystalapps.kecommerce.adapter
 
-import android.annotation.SuppressLint
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DiffUtil.DiffResult
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import image.crystalapps.kecommerce.utils.Model
+import image.crystalapps.kecommerce.model.Model
 
 
-abstract class BaseAdapter< M :Model, VDB: ViewDataBinding>(diffUtil: DiffUtil.ItemCallback<M>) : ListAdapter<M,BaseViewHolder<VDB>>(diffUtil) {
+abstract class BaseAdapter< M : Model, VDB: ViewDataBinding>(diffUtil: DiffUtil.ItemCallback<M>) : ListAdapter<M,BaseViewHolder<VDB>>(diffUtil) {
 
 
   //  open var items: List<M>? = ArrayList()
