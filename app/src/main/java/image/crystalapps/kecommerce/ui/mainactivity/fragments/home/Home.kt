@@ -6,11 +6,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystala.MainActivity
 import image.crystalapps.kecommerce.BR
@@ -18,16 +15,14 @@ import image.crystalapps.kecommerce.HiltTestActivity
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.HomeFragmentBinding
 import image.crystalapps.kecommerce.databinding.replaceOnce
-import image.crystalapps.kecommerce.databinding.setUpRecyclerView
 import image.crystalapps.kecommerce.listeners.FragmentVisibilityListener
 import image.crystalapps.kecommerce.model.Categories
 import image.crystalapps.kecommerce.model.Clothes
-import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.clothes.ClothesActivity
-import image.crystalapps.kecommerce.ui.mainactivity.fragments.cart.Cart
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.popular.PopularFragment
-import image.crystalapps.kecommerce.ui.mainactivity.fragments.products.MainProducts
+import image.crystalapps.kecommerce.ui.mainactivity.fragments.products.BlogFragment
+import image.crystalapps.kecommerce.ui.mainactivity.fragments.recent.RecentProducts
 import image.crystalapps.kecommerce.utils.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -55,27 +50,20 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
         mHomeFragmentBinding= getViewDataBinding()
 
         if(getBaseActivity() is MainActivity) {
-
             mMainActivity = getBaseActivity() as MainActivity
             mHomeFragmentBinding?.run {
-                mMainActivity.setSupportActionBar(homeToolbar)
-                navController = Navigation.findNavController(root)
-            }
+            //    mMainActivity.setSupportActionBar(homeToolbar)
+            //    navController = Navigation.findNavController(root)
 
+            }
         }
         else if(getBaseActivity() is HiltTestActivity) {
         } else{
             throw ClassCastException("Home Fragment is not Child Class of BaseActivity")
         }
 
-
         mViewModel.setUpCategories()
-//
 //       mViewModel.categoriesLiveData.observe(viewLifecycleOwner , categoriesObserver)
-
-
-
-
         initFragments()
         setHasOptionsMenu(true)
     }
@@ -90,13 +78,13 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
 
 
 
-    fun initFragments(){
-        childFragmentManager.replaceOnce(R.id.recentContainer ,Cart::class.java.name ,{
-            val fragment  =   MainProducts()
+   private fun initFragments(){
+        childFragmentManager.replaceOnce(R.id.recentContainer ,RecentProducts::class.java.name ,{
+            val fragment  = RecentProducts()
             fragment.visibilityListener  =      object: FragmentVisibilityListener{
                 override fun changeVisibility(isVisible: Boolean) {
 
-                    recentContainer.visibility =if(isVisible)View.VISIBLE else View.INVISIBLE
+                    recentContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
 
 
                 }
@@ -105,19 +93,24 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
         }
         ).commit()
 
-        childFragmentManager.replaceOnce(R.id.popularContainer ,Cart::class.java.name ,{
+        childFragmentManager.replaceOnce(R.id.popularContainer ,PopularFragment::class.java.name ,{
             val fragment  =   PopularFragment()
             fragment.visibilityListener  =      object: FragmentVisibilityListener{
                 override fun changeVisibility(isVisible: Boolean) {
-
-                    recentContainer.visibility =if(isVisible)View.VISIBLE else View.INVISIBLE
-
-
+                    popularContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
                 }
             }
-            fragment
-        }
-        ).commit()
+            fragment }).commit()
+
+       childFragmentManager.replaceOnce(R.id.blogContainer ,BlogFragment::class.java.name ,{
+           val fragment  =  BlogFragment()
+           fragment.visibilityListener  = object: FragmentVisibilityListener{
+               override fun changeVisibility(isVisible: Boolean) {
+                   blogContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
+               }
+           }
+           fragment }).commit()
+
     }
 
 
@@ -151,3 +144,4 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
 
 
 }
+

@@ -16,7 +16,10 @@ class HomeAdapter(diffUtil: DiffUtil.ItemCallback<Clothes>) :image.crystalapps.k
         binding.run {clothes=item} }
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): OuterRecyclerViewDataBinding {
-        return DataBindingUtil.inflate(inflater ,R.layout.outer_recyclerview,parent ,false) } }
+        return DataBindingUtil.inflate(inflater ,R.layout.outer_recyclerview,parent ,false)
+
+
+    } }
 
 
 

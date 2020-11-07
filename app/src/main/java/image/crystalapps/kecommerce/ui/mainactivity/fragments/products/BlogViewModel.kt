@@ -11,7 +11,7 @@ import image.crystalapps.kecommerce.utils.FirebaseUtils
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class MainProductViewModel  @ViewModelInject  constructor(val dataManager :DataManager) :BaseViewModel<MainProductNavigator>(dataManager ) {
+class BlogViewModel  @ViewModelInject  constructor(val dataManager :DataManager) :BaseViewModel<BlogNavigator>(dataManager ) {
 
 
 

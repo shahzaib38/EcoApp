@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,9 +20,9 @@ import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.HomeAdapter
 
 @AndroidEntryPoint
-class MainProducts :BaseFragment<MainProductViewModel , MainProductDataBinding>() {
+class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
 
-   private val mViewModel by  viewModels<MainProductViewModel>()
+   private val mViewModel by  viewModels<BlogViewModel>()
     private var mMainProductDataBinding :MainProductDataBinding ?=null
 
     var visibilityListener :FragmentVisibilityListener?=null
@@ -35,7 +34,7 @@ class MainProducts :BaseFragment<MainProductViewModel , MainProductDataBinding>(
     override fun getLayoutId(): Int =R.layout.mainproduct_layout
 
 
-    override fun getViewModel(): MainProductViewModel  =mViewModel
+    override fun getViewModel(): BlogViewModel  =mViewModel
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,10 +50,10 @@ class MainProducts :BaseFragment<MainProductViewModel , MainProductDataBinding>(
 
 
     //Diff Call Back
-    private val mClothItemCallBack = object : DiffUtil.ItemCallback<Clothes>(){
-        override fun areItemsTheSame(oldItem: Clothes, newItem: Clothes):
+    private val mClothItemCallBack = object : DiffUtil.ItemCallback<Products>(){
+        override fun areItemsTheSame(oldItem: Products, newItem: Products):
                 Boolean =false
-        override fun areContentsTheSame(oldItem: Clothes, newItem: Clothes):
+        override fun areContentsTheSame(oldItem: Products, newItem: Products):
                 Boolean = oldItem==newItem}
 
 
@@ -66,19 +65,19 @@ class MainProducts :BaseFragment<MainProductViewModel , MainProductDataBinding>(
         list1.add(getProducts())
         list1.add(getProducts())
         list1.add(getProducts())
-      val clothes=  Clothes("Men" ,list1)
+      val clothes=  Clothes("Women" ,list1)
         val list =ArrayList<Clothes>()
         list.add(clothes)
 
-            visibilityListener?.changeVisibility(list.isNotEmpty())
+            visibilityListener?.changeVisibility(false)
 
            // if (list != null) {
                 Toast.makeText(requireContext() ,"Working" ,Toast.LENGTH_LONG).show()
-                val clothesAdapter = HomeAdapter(mClothItemCallBack)
-                clothesAdapter.submitList(list)
+                val blogAdapter = BlogAdapter(mClothItemCallBack)
+                blogAdapter.submitList(list1)
                 mMainProductDataBinding?.recyclerView?.run {
                     this.layoutManager = GridLayoutManager(requireContext(), 2)
-                    this.adapter = clothesAdapter
+                    this.adapter = blogAdapter
                 }?: throw RuntimeException("Runtime Exception ")
 
             //}else{

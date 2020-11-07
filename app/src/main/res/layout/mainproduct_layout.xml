@@ -5,24 +5,42 @@
     <data class="MainProductDataBinding">
         <variable
             name="viewModel"
-            type="image.crystalapps.kecommerce.ui.mainactivity.fragments.products.MainProductViewModel" />
+            type="image.crystalapps.kecommerce.ui.mainactivity.fragments.products.BlogViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <TextView
+            android:id="@+id/titleText"
+            style="@style/SectionTitle"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/seeAll"
+            style="@style/SeeAllText"
+            android:text="see All"
+            app:layout_constraintBaseline_toBaselineOf="@+id/titleText"
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:minHeight="@dimen/product_horizontal_item_size"
+            android:paddingBottom="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

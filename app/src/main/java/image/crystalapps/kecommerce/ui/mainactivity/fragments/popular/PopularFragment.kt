@@ -18,6 +18,7 @@ import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.HomeAdapter
+import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.InnerAdapter
 
 
 @AndroidEntryPoint
@@ -43,10 +44,10 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
         setUpRecyclerView()
     }
     //Diff Call Back
-    private val mClothItemCallBack = object : DiffUtil.ItemCallback<Clothes>(){
-        override fun areItemsTheSame(oldItem: Clothes, newItem: Clothes):
+    private val mClothItemCallBack = object : DiffUtil.ItemCallback<Products>(){
+        override fun areItemsTheSame(oldItem: Products, newItem: Products):
                 Boolean =false
-        override fun areContentsTheSame(oldItem: Clothes, newItem: Clothes):
+        override fun areContentsTheSame(oldItem: Products, newItem: Products):
                 Boolean = oldItem==newItem}
 
 
@@ -66,8 +67,8 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
 
        // if (list != null) {
        Toast.makeText(requireContext() ,"Working" , Toast.LENGTH_LONG).show()
-       val clothesAdapter = HomeAdapter(mClothItemCallBack)
-       clothesAdapter.submitList(list)
+       val clothesAdapter = InnerAdapter(mClothItemCallBack)
+       clothesAdapter.submitList(list1)
        mPopularDataBinding?.popularRecyclerView?.run {
            this.layoutManager = GridLayoutManager(requireContext(), 2)
            this.adapter = clothesAdapter
