@@ -15,5 +15,6 @@
     <color name="white">#FFE57F</color>
     <color name="checkAll_layout">#7C808080</color>
     <color name="colorBackgroundLight">#FFF5F5F5</color>
+    <color name="colorBackgroundDarkTranslucent">#80E6E6E6</color>
 
     </resources>

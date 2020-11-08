@@ -160,5 +160,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="profile_email">Email</string>
     <string name="address">Address</string>
+    <string name="latest">Latest</string>
+    <string name="popular">Popular</string>
 
 </resources>

@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
@@ -63,18 +66,19 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
        val list =ArrayList<Clothes>()
        list.add(clothes)
 
-       visibilityListener?.changeVisibility(false)
 
-       // if (list != null) {
-       Toast.makeText(requireContext() ,"Working" , Toast.LENGTH_LONG).show()
+       visibilityListener?.changeVisibility(list1.isNotEmpty())
+
+       mViewModel.allProductsLiveData.observe(viewLifecycleOwner , Observer {list1->
+
        val clothesAdapter = InnerAdapter(mClothItemCallBack)
        clothesAdapter.submitList(list1)
        mPopularDataBinding?.popularRecyclerView?.run {
-           this.layoutManager = GridLayoutManager(requireContext(), 2)
+           this.layoutManager = LinearLayoutManager(requireContext() ,LinearLayoutManager.HORIZONTAL,false)
            this.adapter = clothesAdapter
-       }?: throw RuntimeException("Runtime Exception ")
+       }
 
-
+       })
    }
 
 

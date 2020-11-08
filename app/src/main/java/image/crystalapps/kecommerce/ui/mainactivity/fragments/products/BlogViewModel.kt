@@ -65,14 +65,14 @@ class BlogViewModel  @ViewModelInject  constructor(val dataManager :DataManager)
 //       return result
 //   }
 
-    private fun filterData(data : Result<List<Products>>) : LiveData<List<Clothes>> {
-        val result = MutableLiveData<List<Clothes>>()
+    private fun filterData(data : Result<List<Products>>) : LiveData<List<Products>> {
+        val result = MutableLiveData<List<Products>>()
 
         if (data is Result.Success){
             viewModelScope.launch {
 
 
-                result.value =createClothList(data.data)
+                result.value =data.data
             }
         }
 

@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystala.MainActivity
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.HiltTestActivity
 import image.crystalapps.kecommerce.R
+import image.crystalapps.kecommerce.adapter.CategoriesListAdapter
 import image.crystalapps.kecommerce.databinding.HomeFragmentBinding
 import image.crystalapps.kecommerce.databinding.replaceOnce
 import image.crystalapps.kecommerce.listeners.FragmentVisibilityListener
@@ -39,10 +43,10 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
 
 
     //Diff Call Back
-    private val mClothItemCallBack = object : DiffUtil.ItemCallback<Clothes>(){
-        override fun areItemsTheSame(oldItem: Clothes, newItem: Clothes):
+    private val mClothItemCallBack = object : DiffUtil.ItemCallback<Categories>(){
+        override fun areItemsTheSame(oldItem: Categories, newItem: Categories):
                 Boolean =false
-        override fun areContentsTheSame(oldItem: Clothes, newItem: Clothes):
+        override fun areContentsTheSame(oldItem: Categories, newItem: Categories):
                 Boolean = oldItem==newItem}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,8 +70,24 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
 //       mViewModel.categoriesLiveData.observe(viewLifecycleOwner , categoriesObserver)
         initFragments()
         setHasOptionsMenu(true)
+
+        setUpRecyclerView()
     }
 
+ private fun setUpRecyclerView(){
+
+        mViewModel.categoriesLiveData.observe(viewLifecycleOwner, Observer {list->
+
+            val clothesAdapter = CategoriesListAdapter(this ,mClothItemCallBack)
+            clothesAdapter.submitList(list)
+            mHomeFragmentBinding?.categoriesRecyclerView?.run {
+                this.layoutManager = LinearLayoutManager(requireContext() ,
+                    LinearLayoutManager.HORIZONTAL,false)
+                this.adapter = clothesAdapter
+            }
+        })
+
+    }
 
 //   private val categoriesObserver= Observer<List<Categories>> {list->
 //        mHomeFragmentBinding?.run{

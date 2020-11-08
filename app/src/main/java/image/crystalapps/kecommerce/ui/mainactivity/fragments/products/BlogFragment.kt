@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
@@ -18,6 +20,8 @@ import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.HomeAdapter
+import io.reactivex.Observer
+import kotlinx.android.synthetic.main.mainproduct_layout.*
 
 @AndroidEntryPoint
 class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
@@ -58,27 +62,41 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
 
 
     private fun setUpRecyclerView(){
-       // mViewModel.allProductsLiveData.observe(viewLifecycleOwner , Observer {list->
+        mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
+            //
+//        val list1 =ArrayList<Products>()
+//        list1.add(getProducts())
+//        list1.add(getProducts())
+//        list1.add(getProducts())
+//        list1.add(getProducts())
+//      val clothes=  Clothes("Women" ,list1)
+//        val list =ArrayList<Clothes>()
+//        list.add(clothes)
 
-        val list1 =ArrayList<Products>()
-        list1.add(getProducts())
-        list1.add(getProducts())
-        list1.add(getProducts())
-        list1.add(getProducts())
-      val clothes=  Clothes("Women" ,list1)
-        val list =ArrayList<Clothes>()
-        list.add(clothes)
+            visibilityListener?.changeVisibility(list.isNotEmpty())
 
-            visibilityListener?.changeVisibility(false)
+             if (list.isNotEmpty()) {
 
-           // if (list != null) {
-                Toast.makeText(requireContext() ,"Working" ,Toast.LENGTH_LONG).show()
-                val blogAdapter = BlogAdapter(mClothItemCallBack)
-                blogAdapter.submitList(list1)
-                mMainProductDataBinding?.recyclerView?.run {
-                    this.layoutManager = GridLayoutManager(requireContext(), 2)
-                    this.adapter = blogAdapter
-                }?: throw RuntimeException("Runtime Exception ")
+                 val blogAdapter = BlogAdapter(mClothItemCallBack)
+                 blogAdapter.submitList(list)
+                 mMainProductDataBinding?.recyclerView?.run {
+                     //                     this.layoutManager = GridLayoutManager(requireContext(), 2)
+//                     this.adapter = blogAdapter
+
+                     val layoutManager = LinearLayoutManager(requireContext())
+//                     val divider = DividerItemDecoration(requireContext(), R.drawable.divider_line)
+                     this.layoutManager = layoutManager
+
+                     this.adapter = blogAdapter
+                     this.isNestedScrollingEnabled = false
+  //                   this.addItemDecoration(divider)
+
+
+                 }
+                 }
+
+
+        })
 
             //}else{
 
