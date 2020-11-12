@@ -1,6 +1,5 @@
 package image.crystalapps.kecommerce.ui.mainactivity.fragments.cart
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,9 +13,10 @@ import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.HiltTestActivity
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.CartFragmentBinding
+import image.crystalapps.kecommerce.extensions.multiple
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.ui.base.BaseFragment
-import image.crystalapps.kecommerce.ui.checkout.CheckOut
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 @AndroidEntryPoint
 class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator {
@@ -64,7 +64,8 @@ class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator 
         if(list!=null ) {
             val clothesAdapter = CartAdapter(mViewModel,mClothItemCallBack)
             clothesAdapter.submitList(list)
-
+            mViewModel.setTotalPrice(list.multiple().toString())
+            mViewModel.setItems(list.size)
             mCartFragmentBinding?.run {
                 cartRecyclerview.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -75,11 +76,15 @@ class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator 
 
     }
 
-    override fun checkOut(total: Int, arrayList: ArrayList<Cart>) {
-        val intent = Intent(requireContext() ,CheckOut::class.java)
-        intent.putExtra("array_list" ,arrayList)
-        intent.putExtra("total" ,total)
-        startActivity(intent)
+    override fun checkOut() {
+        val totalText=   totalId.text
+        Toast.makeText(requireContext() ,totalText.toString() ,Toast.LENGTH_LONG).show()
+
+//        val intent = Intent(requireContext() ,CheckOut::class.java)
+//        intent.putExtra("array_list" ,arrayList)
+//        intent.putExtra("total" ,total)
+//        startActivity(intent)
+
     }
 
 

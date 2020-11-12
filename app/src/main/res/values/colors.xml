@@ -12,9 +12,11 @@
     <color name="backgroundcolor">#807157</color>
     <color name="price_color" >#B71C1C</color>
     <color name="checkall_color">#D5142A</color>
-    <color name="white">#FFE57F</color>
+    <color name="white">#FFFF</color>
     <color name="checkAll_layout">#7C808080</color>
     <color name="colorBackgroundLight">#FFF5F5F5</color>
     <color name="colorBackgroundDarkTranslucent">#80E6E6E6</color>
+    <color name="textColorSecondary">#FF8B8B8B</color>
+    <color name="textColorPrimary">#FF000000</color>
 
     </resources>

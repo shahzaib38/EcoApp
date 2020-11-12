@@ -166,5 +166,8 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
 
+    //Frsco
+    implementation 'com.facebook.fresco:fresco:1.7.1'
+
 
 }

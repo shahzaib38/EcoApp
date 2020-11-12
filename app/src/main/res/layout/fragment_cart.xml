@@ -30,20 +30,35 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
 
+            android:background="@drawable/cart_style"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/itemId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
+                totalItems="@{viewModel.totalItems}"
+                android:textSize="15sp"
+                android:paddingLeft="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/totalId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@{String.valueOf(viewModel.sumUp)}"
-                android:textSize="20sp"
+                totalPrice="@{viewModel.totalText}"
+                android:textSize="15sp"
+                android:paddingLeft="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/itemId" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -51,6 +66,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@color/checkall_color"
                 android:text="Check Out"
+                android:textAllCaps="false"
                 android:onClick="@{()->viewModel.checkOut()}"
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"

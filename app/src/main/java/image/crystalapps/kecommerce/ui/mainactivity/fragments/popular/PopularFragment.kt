@@ -69,7 +69,7 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
 
        visibilityListener?.changeVisibility(list1.isNotEmpty())
 
-       mViewModel.allProductsLiveData.observe(viewLifecycleOwner , Observer {list1->
+   //    mViewModel.allProductsLiveData.observe(viewLifecycleOwner , Observer {list1->
 
        val clothesAdapter = InnerAdapter(mClothItemCallBack)
        clothesAdapter.submitList(list1)
@@ -78,7 +78,7 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
            this.adapter = clothesAdapter
        }
 
-       })
+     //  })
    }
 
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -21,7 +20,6 @@ import image.crystalapps.kecommerce.databinding.HomeFragmentBinding
 import image.crystalapps.kecommerce.databinding.replaceOnce
 import image.crystalapps.kecommerce.listeners.FragmentVisibilityListener
 import image.crystalapps.kecommerce.model.Categories
-import image.crystalapps.kecommerce.model.Clothes
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.clothes.ClothesActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.popular.PopularFragment
@@ -67,71 +65,53 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
         }
 
         mViewModel.setUpCategories()
-//       mViewModel.categoriesLiveData.observe(viewLifecycleOwner , categoriesObserver)
         initFragments()
         setHasOptionsMenu(true)
-
-        setUpRecyclerView()
-    }
+        setUpRecyclerView() }
 
  private fun setUpRecyclerView(){
-
         mViewModel.categoriesLiveData.observe(viewLifecycleOwner, Observer {list->
-
             val clothesAdapter = CategoriesListAdapter(this ,mClothItemCallBack)
             clothesAdapter.submitList(list)
             mHomeFragmentBinding?.categoriesRecyclerView?.run {
                 this.layoutManager = LinearLayoutManager(requireContext() ,
                     LinearLayoutManager.HORIZONTAL,false)
-                this.adapter = clothesAdapter
-            }
-        })
-
-    }
-
-//   private val categoriesObserver= Observer<List<Categories>> {list->
-//        mHomeFragmentBinding?.run{
-//            this.root.setUpRecyclerView(this@Home, this.recyclerView ,list)
-//        }?:throw NullPointerException("Home Fragment Binding is null")
-//
-//    }
+                this.adapter = clothesAdapter } })
+ }
 
 
 
-   private fun initFragments(){
-        childFragmentManager.replaceOnce(R.id.recentContainer ,RecentProducts::class.java.name ,{
-            val fragment  = RecentProducts()
-            fragment.visibilityListener  =      object: FragmentVisibilityListener{
-                override fun changeVisibility(isVisible: Boolean) {
+    private fun recentFragment(){
+       childFragmentManager.replaceOnce(R.id.recentContainer ,RecentProducts::class.java.name ,{
+           val fragment  = RecentProducts()
+           fragment.visibilityListener  =      object: FragmentVisibilityListener{
+               override fun changeVisibility(isVisible: Boolean) {
 
-                    recentContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
-
-
-                }
-            }
-            fragment
-        }
-        ).commit()
-
+                   recentContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
+               } }
+           fragment }).commit()
+   }
+    private fun popularFragment(){
         childFragmentManager.replaceOnce(R.id.popularContainer ,PopularFragment::class.java.name ,{
             val fragment  =   PopularFragment()
             fragment.visibilityListener  =      object: FragmentVisibilityListener{
                 override fun changeVisibility(isVisible: Boolean) {
-                    popularContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
-                }
-            }
+                    popularContainer.visibility =if(isVisible)View.VISIBLE else View.GONE } }
             fragment }).commit()
-
-       childFragmentManager.replaceOnce(R.id.blogContainer ,BlogFragment::class.java.name ,{
-           val fragment  =  BlogFragment()
-           fragment.visibilityListener  = object: FragmentVisibilityListener{
-               override fun changeVisibility(isVisible: Boolean) {
-                   blogContainer.visibility =if(isVisible)View.VISIBLE else View.GONE
-               }
-           }
-           fragment }).commit()
-
     }
+    private fun blogFragment(){
+        childFragmentManager.replaceOnce(R.id.blogContainer ,BlogFragment::class.java.name ,{
+            val fragment  =  BlogFragment()
+            fragment.visibilityListener  = object: FragmentVisibilityListener{
+                override fun changeVisibility(isVisible: Boolean) {
+                    blogContainer.visibility =if(isVisible)View.VISIBLE else View.GONE } }
+            fragment }).commit()
+    }
+
+    private fun initFragments(){
+       recentFragment()
+       popularFragment()
+       blogFragment() }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -151,6 +131,7 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
     override fun clickItem(view: View, item: Categories) {
 //     val bundle=   bundleOf("category" to item.name)
 //        navController.navigate(R.id.From_Home_To_ClothActivity ,bundle)
+
             val intent =Intent(mMainActivity , ClothesActivity::class.java)
               intent.putExtra("category" ,item.name)
             startActivity(intent)

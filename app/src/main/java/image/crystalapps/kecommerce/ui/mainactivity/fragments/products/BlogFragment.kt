@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -62,41 +63,37 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
 
 
     private fun setUpRecyclerView(){
-        mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
-            //
-//        val list1 =ArrayList<Products>()
-//        list1.add(getProducts())
-//        list1.add(getProducts())
-//        list1.add(getProducts())
-//        list1.add(getProducts())
+  //      mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
+
+        val list1 =ArrayList<Products>()
+        list1.add(getProducts())
+        list1.add(getProducts())
+        list1.add(getProducts())
+        list1.add(getProducts())
 //      val clothes=  Clothes("Women" ,list1)
 //        val list =ArrayList<Clothes>()
 //        list.add(clothes)
 
-            visibilityListener?.changeVisibility(list.isNotEmpty())
+            visibilityListener?.changeVisibility(list1.isNotEmpty())
 
-             if (list.isNotEmpty()) {
+             if (list1.isNotEmpty()) {
 
                  val blogAdapter = BlogAdapter(mClothItemCallBack)
-                 blogAdapter.submitList(list)
+                 blogAdapter.submitList(list1)
                  mMainProductDataBinding?.recyclerView?.run {
-                     //                     this.layoutManager = GridLayoutManager(requireContext(), 2)
-//                     this.adapter = blogAdapter
 
                      val layoutManager = LinearLayoutManager(requireContext())
-//                     val divider = DividerItemDecoration(requireContext(), R.drawable.divider_line)
                      this.layoutManager = layoutManager
-
                      this.adapter = blogAdapter
                      this.isNestedScrollingEnabled = false
-  //                   this.addItemDecoration(divider)
+                     val divider = DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL)
+                     divider.setDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.divider_line)!!)
+                     this.addItemDecoration(divider)
+
+                 } }
 
 
-                 }
-                 }
-
-
-        })
+     //   })
 
             //}else{
 

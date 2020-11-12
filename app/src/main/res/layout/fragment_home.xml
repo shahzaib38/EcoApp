@@ -25,48 +25,49 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/checkAll_layout"
-                android:orientation="vertical">
+                android:background="@color/colorBackgroundDarkTranslucent"
+
+                >
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoriesRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
+                    android:background="@color/colorBackgroundLight"
                     app:layout_constraintBottom_toTopOf="@+id/recentContainer"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    android:background="@color/colorBackgroundLight"
 
-                    />
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <FrameLayout
                     android:id="@+id/recentContainer"
                     android:layout_width="0dp"
-                    android:layout_height="400dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="600dp"
                     android:background="@color/colorBackgroundLight"
                     app:layout_constraintBottom_toTopOf="@+id/popularContainer"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="12dp"
 
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categories" />
+                    app:layout_constraintTop_toBottomOf="@+id/categoriesRecyclerView" />
 
                 <FrameLayout
                     android:id="@+id/popularContainer"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:background="@color/colorBackgroundLight"
-                   android:layout_marginTop="20dp"
                     app:layout_constraintBottom_toTopOf="@+id/blogContainer"
+
+                    android:layout_marginTop="12dp"
+
                     app:layout_constraintEnd_toEndOf="parent"
-
-
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recentContainer" />
@@ -74,9 +75,9 @@
                 <FrameLayout
                     android:id="@+id/blogContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorBackgroundLight"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="12dp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

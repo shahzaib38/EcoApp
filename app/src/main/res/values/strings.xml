@@ -160,7 +160,10 @@
     <string name="phone_number">Phone Number</string>
     <string name="profile_email">Email</string>
     <string name="address">Address</string>
-    <string name="latest">Latest</string>
-    <string name="popular">Popular</string>
+    <string name="latest">Latest Arrivals</string>
+    <string name="popular">POPULAR</string>
+    <string name="remove_button">Remove</string>
+    <string name="quantity_label">QTY:</string>
+    <string name="default_product_quantity">1</string>
 
 </resources>

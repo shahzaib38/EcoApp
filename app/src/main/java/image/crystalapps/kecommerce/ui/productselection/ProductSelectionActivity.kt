@@ -24,6 +24,7 @@ import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.LogInDialogFragment
 import image.crystalapps.kecommerce.utils.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_product_selection.*
 
 @AndroidEntryPoint
 class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBinding>()  ,OnItemClickListener<Sizes>,SelectionNavigator {
@@ -50,20 +51,9 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
         mProductSelectionDataBinding = getViewDataBinding()
 
         mViewModel.setNavigator(this)
-    //    mProductSelectionDataBinding?.run {
-            product = intent.getParcelableExtra<Products>("parcel")
 
-     // val parcel=             intent.getStringExtra("parcel")
-
-  //      if(parcel.isNotEmpty()){
-       //     Toast.makeText(this ,parcel ,Toast.LENGTH_LONG).show()
-//        }else{
-//
-//            throw NullPointerException("Parcel is null")
-//        }
-
-            //    ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
-   //     }?:throw ClassCastException("Product Activity Binding is null")
+        product = intent.getParcelableExtra<Products>("parcel")
+        ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
 
         loadItem()
     }
