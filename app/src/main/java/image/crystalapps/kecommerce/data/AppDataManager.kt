@@ -1,5 +1,6 @@
 package image.crystalapps.kecommerce.data
 
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -66,6 +67,17 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
         val userProfile=      ProductLiveData(documentReference ,UserProfile::class.java)
         documentReference.addSnapshotListener(userProfile)
         return userProfile }
+
+    override fun loadRelatedProducts(categoryNaem: String) : QueryLiveData<Products> {
+
+        var query: Query=Firebase.firestore.collection("Fashion List").document(categoryNaem)
+            .collection("Products")
+
+
+        val productLiveData = QueryLiveData(query,Products::class.java)
+        query.addSnapshotListener(productLiveData)
+        return productLiveData
+    }
 
 
     private fun toQuery(filters: Filter): Query{ // Construct query basic query

@@ -108,8 +108,11 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:id="@+id/realtiveContainer" />
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relatedContainer" />
+
+
+
                 <View
                     android:id="@+id/relativebottom"
                     android:layout_width="match_parent"

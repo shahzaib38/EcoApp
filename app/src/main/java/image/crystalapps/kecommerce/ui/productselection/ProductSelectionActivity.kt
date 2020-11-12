@@ -17,12 +17,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
+import image.crystalapps.kecommerce.databinding.FragmentEmailUsBinding
 import image.crystalapps.kecommerce.databinding.ProductDataBinding
+import image.crystalapps.kecommerce.listeners.FragmentVisibilityListener
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.LogInDialogFragment
+import image.crystalapps.kecommerce.ui.mainactivity.fragments.related.RelatedFragment
 import image.crystalapps.kecommerce.utils.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_product_selection.*
 
@@ -48,21 +51,31 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
      private lateinit var product : Products
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mProductSelectionDataBinding = getViewDataBinding()
-
         mViewModel.setNavigator(this)
-
         product = intent.getParcelableExtra<Products>("parcel")
-        ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
 
+
+        ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
         loadItem()
+        setUpRelatedFragmentListener()
     }
+
+
+   private fun setUpRelatedFragmentListener(){
+      val relatedFragment = RelatedFragment.getInstance("men")
+       relatedFragment.fragmentVisibilityListener =object :FragmentVisibilityListener{
+           override fun changeVisibility(isVisible: Boolean) {
+               if(isVisible)View.VISIBLE else View.GONE } }
+       supportFragmentManager.beginTransaction().replace(R.id.relatedContainer ,relatedFragment).commit()
+
+    }
+
 
    private fun loadIcon(){
         mProductSelectionDataBinding?.run {
-            Glide.with(imagedesign.context).load(product.productImage?.toUri()).into(this.imagedesign)
-        }
-    }
+            Glide.with(imagedesign.context).load(product.productImage?.toUri()).into(this.imagedesign) } }
 
    private fun loadItem(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && addTransitionListerner()) {
@@ -88,64 +101,40 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
             oldItem: ProductsDetails,
             newItem:ProductsDetails
         ): Boolean =false
-
-
-    }
+   }
 
    private fun addTransitionListerner():Boolean{
-
        val transition =window.sharedElementEnterTransition
 
        if(transition!=null) {
            transition.addListener(object:Transition.TransitionListener{
                override fun onTransitionEnd(transition: Transition) {
+                   transition.removeListener(this) }
 
-                   transition.removeListener(this)
-               }
+               override fun onTransitionResume(transition: Transition) {}
 
-               override fun onTransitionResume(transition: Transition) {
-               }
-
-               override fun onTransitionPause(transition: Transition) {
-               }
+               override fun onTransitionPause(transition: Transition) {}
 
                override fun onTransitionCancel(transition: Transition) {
-                   transition.removeListener(this)
-               }
+                   transition.removeListener(this) }
 
-               override fun onTransitionStart(transition: Transition) {
-               }
-
-
+               override fun onTransitionStart(transition: Transition) {}
            }
-
            )
-
-           return true
-       }
-
-       return false
-   }
+           return true }
+       return false }
 
     override fun clickItem(view: View, item: Sizes) {
 
     }
 
     override fun addToCart() {
-
         if(Firebase.auth.currentUser !=null){
             Toast.makeText(this ,"Added to Cart",Toast.LENGTH_LONG).show()
-
-
-            mViewModel.addToCart(Cart(1,product))
-
-        }
-
+            mViewModel.addToCart(Cart(1,product)) }
         else{
            LogInDialogFragment.getInstance().showDialog(supportFragmentManager)
         }
-
-
     }
 
 
