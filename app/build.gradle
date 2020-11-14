@@ -170,4 +170,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.7.1'
 
 
+    //Circle Indicator
+    implementation 'me.relex:circleindicator:2.1.4'
+
 }

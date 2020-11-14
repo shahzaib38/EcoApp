@@ -23,7 +23,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
-            app:productImageUrl="@{cart.products.productImage}"
+            app:productImageUrl="@{cart.products.productImage[0]}"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"

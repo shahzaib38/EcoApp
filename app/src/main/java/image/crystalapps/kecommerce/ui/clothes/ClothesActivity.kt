@@ -60,10 +60,39 @@ class ClothesActivity : BaseActivity<ClothesViewModel, ClothesDataBinding>(),
                 title = category
                 setSupportActionBar(this)
             }
-            Toast.makeText(this, category, Toast.LENGTH_LONG).show()
+
             mViewModel.filter.value = Filter.default
         }
-        mViewModel.allProductsLiveData.observe(this, clothesPurchase)
+//        mViewModel.allProductsLiveData.observe(this, clothesPurchase)
+
+        // Products CallBack
+        //  val clothesPurchase =
+        //       Observer<List<Products>> { list ->
+        //     if (list != null && list.isNotEmpty()) {
+
+        val list =ArrayList<Products>()
+        list.add(getProducts())
+
+        list.add(getProducts())
+        list.add(getProducts())
+        list.add(getProducts())
+        //  val clothes=  Clothes("Men" ,list1)
+//    val list =ArrayList<Clothes>()
+//    list.add(clothes)
+
+
+        val clothesAdapter = ClothesAdapter(this@ClothesActivity, mClothItemCallBack)
+        clothesAdapter.submitList(list)
+        mClothesDataBinding?.clothesRecyclerview?.run {
+            this.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            this.adapter = clothesAdapter
+        }
+
+
+        //       }
+        //     }
+
 
     }
 
@@ -95,21 +124,6 @@ class ClothesActivity : BaseActivity<ClothesViewModel, ClothesDataBinding>(),
     }
 
 
-    // Products CallBack
-    val clothesPurchase =
-        Observer<List<Products>> { list ->
-            if (list != null && list.isNotEmpty()) {
-                val clothesAdapter = ClothesAdapter(this@ClothesActivity, mClothItemCallBack)
-                clothesAdapter.submitList(list)
-                mClothesDataBinding?.clothesRecyclerview?.run {
-                    this.layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    this.adapter = clothesAdapter
-                }
-
-
-            }
-        }
 
 
     //Diff Call Back
@@ -127,6 +141,8 @@ class ClothesActivity : BaseActivity<ClothesViewModel, ClothesDataBinding>(),
 
     private fun getProducts() : Products {
         val uri1: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+
         val varietiesArray=ArrayList<Sizes>()
         val varietiesArray1=ArrayList<Sizes>()
 
@@ -149,14 +165,21 @@ class ClothesActivity : BaseActivity<ClothesViewModel, ClothesDataBinding>(),
         productDetails.add(productsDetailsItem1)
         productDetails.add(productsDetailsItem2)
         val uri: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+        val uriArray =ArrayList<String>()
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+
         val products= Products(
+            "Jeans",
             "men",
             "Black T Shirt",
             "12",
             4,
             "1.33",
             "SM22446",
-            uri.toString(),
+                uriArray,
             "Black T -shirt with design",
             12200,
             productDetails)

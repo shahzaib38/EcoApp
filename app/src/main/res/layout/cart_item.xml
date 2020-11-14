@@ -191,7 +191,7 @@
                 style="@style/SimpleDraweeView"
                 android:layout_width="110dp"
                 android:layout_height="100dp"
-                customImageUrl="@{cart.products.productImage}"
+                customImageUrl="@{cart.products.productImage[0]}"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toTopOf="@+id/bottomHorizontalGuideline"
                 app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"

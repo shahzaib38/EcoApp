@@ -68,11 +68,9 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
         documentReference.addSnapshotListener(userProfile)
         return userProfile }
 
-    override fun loadRelatedProducts(categoryNaem: String) : QueryLiveData<Products> {
-
+    override fun loadRelatedProducts(categoryNaem: String ,productValue :String) : QueryLiveData<Products> {
         var query: Query=Firebase.firestore.collection("Fashion List").document(categoryNaem)
-            .collection("Products")
-
+            .collection("Products").whereEqualTo("productType",productValue)
 
         val productLiveData = QueryLiveData(query,Products::class.java)
         query.addSnapshotListener(productLiveData)
@@ -81,7 +79,7 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
 
 
     private fun toQuery(filters: Filter): Query{ // Construct query basic query
-        var query: Query=Firebase.firestore.collection("Fashion List").document("Women")
+        var query: Query=Firebase.firestore.collection("Fashion List").document("Men")
             .collection("Products")
 
         if (filters == null) {

@@ -21,6 +21,7 @@ interface DataManager{
     fun decrement(product: Cart)
 
     fun getUserProfile(userId :String) : ProductLiveData<UserProfile>
+    fun loadRelatedProducts(categoryNaem : String ,productValue :String):  QueryLiveData<Products>
 
-    fun loadRelatedProducts(categoryNaem : String):  QueryLiveData<Products>
+
 }

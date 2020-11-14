@@ -129,14 +129,25 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
         productDetails.add(productsDetailsItem1)
         productDetails.add(productsDetailsItem2)
         val uri: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+
+
+        val uriArray =ArrayList<String>()
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+
+
         val products= Products(
+
+            "Jeans",
             "men",
             "Black T Shirt",
             "12",
             4,
             "1.33",
             "SM22446",
-            uri.toString(),
+            uriArray,
             "Black T -shirt with design",
             12200,
             productDetails)

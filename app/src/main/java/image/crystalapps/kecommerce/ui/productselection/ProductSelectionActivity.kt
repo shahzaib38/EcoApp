@@ -26,6 +26,7 @@ import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.LogInDialogFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.related.RelatedFragment
+import image.crystalapps.kecommerce.ui.productselection.fragments.PagerFragment
 import image.crystalapps.kecommerce.utils.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_product_selection.*
 
@@ -57,11 +58,19 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
         product = intent.getParcelableExtra<Products>("parcel")
 
 
-        ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
+      //  ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
         loadItem()
         setUpRelatedFragmentListener()
+        setUpPagerFragment(product)
     }
 
+
+    private fun setUpPagerFragment(products: Products){
+    val pagerFragment=    PagerFragment.getInstance(products ,1)
+        pagerFragment.run {
+            supportFragmentManager.beginTransaction().replace(R.id.multiImageContainer ,this).commit() }
+
+    }
 
    private fun setUpRelatedFragmentListener(){
       val relatedFragment = RelatedFragment.getInstance("men")
@@ -74,8 +83,10 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
 
 
    private fun loadIcon(){
-        mProductSelectionDataBinding?.run {
-            Glide.with(imagedesign.context).load(product.productImage?.toUri()).into(this.imagedesign) } }
+     //   mProductSelectionDataBinding?.run {
+   //         Glide.with(imagedesign.context).load(product.productImage?.toUri()).into(this.imagedesign) }
+
+   }
 
    private fun loadItem(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && addTransitionListerner()) {
