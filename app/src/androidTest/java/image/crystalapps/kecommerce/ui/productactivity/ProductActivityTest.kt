@@ -87,8 +87,12 @@ class ProductActivityTest {
         productDetails.add(productsDetailsItem1)
         productDetails.add(productsDetailsItem2)
 
+            val uriArrayList =ArrayList<String>()
         val uri: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
-        val products= Products("men", "Black T Shirt", "12", 4, "1.33", "SM22446", uri.toString(), "Black T -shirt with design", 12200, productDetails)
+     uriArrayList.add(uri.toString())
+      uriArrayList.add(uri.toString())
+            uriArrayList.add(uri.toString())
+        val products= Products("men", "Black T Shirt", "12", "4", 3,"1.33", "SM22446", uriArrayList, "Black T -shirt with design", 12200, productDetails)
         val intent  =Intent()
         intent.putExtra("parcel",products)
         return intent

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data
+        class="ImageSelectItemDataBinding">
+
+
+        <variable
+            name="viewModel"
+            type="image.crystalapps.kecommerce.ui.productselection.ProductViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/noImagePlaceholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_placeholder"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:visibility="invisible"
+            app:ci_drawable="@drawable/background_circle_selected"
+            app:ci_drawable_unselected="@drawable/background_circle_unselected" />
+
+    </FrameLayout>
+</layout>

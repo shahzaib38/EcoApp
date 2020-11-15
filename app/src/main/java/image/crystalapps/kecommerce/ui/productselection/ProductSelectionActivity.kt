@@ -1,5 +1,6 @@
 package image.crystalapps.kecommerce.ui.productselection
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.core.view.ViewCompat
@@ -55,13 +56,14 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
 
         mProductSelectionDataBinding = getViewDataBinding()
         mViewModel.setNavigator(this)
+
         product = intent.getParcelableExtra<Products>("parcel")
 
 
       //  ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
         loadItem()
         setUpRelatedFragmentListener()
-        setUpPagerFragment(product)
+        setUpPagerFragment(getProducts())
     }
 
 
@@ -148,5 +150,50 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
         }
     }
 
+    private fun getProducts() : Products {
+        val uri1: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+
+        val varietiesArray=ArrayList<Sizes>()
+        val varietiesArray1=ArrayList<Sizes>()
+
+        val varieties=  Sizes("" ,uri1.toString())
+        val varieties1=  Sizes("S",null)
+        val varieties2=  Sizes("M",null)
+        val varieties3=  Sizes("L",null)
+        val varieties4=  Sizes("XL",null)
+
+        varietiesArray.add(varieties)
+        varietiesArray1.add(varieties1)
+        varietiesArray1.add(varieties2)
+        varietiesArray1.add(varieties3)
+        varietiesArray1.add(varieties4)
+
+        val productDetails=ArrayList<ProductsDetails>()
+        val productsDetailsItem1 = ProductsDetails("Varietes",varietiesArray )
+        val productsDetailsItem2 = ProductsDetails("sizes",varietiesArray1 )
+
+        productDetails.add(productsDetailsItem1)
+        productDetails.add(productsDetailsItem2)
+        val uri: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+        val uriArray =ArrayList<String>()
+        uriArray.add(uri.toString())
+//        uriArray.add(uri.toString())
+        //      uriArray.add(uri.toString())
+
+        val products= Products(
+            "Jeans",
+            "men",
+            "Black T Shirt",
+            "12",
+            4,
+            "1.33",
+            "SM22446",
+            uriArray,
+            "Black T -shirt with design",
+            12200,
+            productDetails)
+        return products }
 
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="product_horizontal_item_size">170dp</dimen>
+    <dimen name="element_space">8dp</dimen>
+    <dimen name="content_space">16dp</dimen>
+    <dimen name="default_image_size" >100dp</dimen>
+
+</resources>
