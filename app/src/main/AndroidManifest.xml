@@ -16,7 +16,6 @@
         <activity android:name=".ui.productselection.ProductSelectionActivity"/>
 
 
-
         <activity android:name=".ui.clothes.ClothesActivity"/>
 
 
@@ -24,15 +23,18 @@
 
         <activity android:name=".ui.checkout.CheckOut">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
 
         <activity android:name="image.crystala.MainActivity"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
 
         <activity android:name=".ui.filter.FilterActivity">

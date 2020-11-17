@@ -46,6 +46,12 @@ class MainActivity : BaseActivity<MainViewModel, MainDataBinding>(){
     private val mViewModel by viewModels<MainViewModel>()
 
 
+   infix fun String.add(s : String ) :String{
+
+
+        return ""
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +64,16 @@ class MainActivity : BaseActivity<MainViewModel, MainDataBinding>(){
         setUpNavigationComponent()
         mSharedPreferenceEntry = mSaveTokenSharedPreferenceHelper.getTokenInformation()
         setUpUi()
+
+
+
+
+
+
+
+
+
+
 
     }
 

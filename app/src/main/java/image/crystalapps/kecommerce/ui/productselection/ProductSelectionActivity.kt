@@ -63,7 +63,7 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
       //  ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
         loadItem()
         setUpRelatedFragmentListener()
-        setUpPagerFragment(getProducts())
+        setUpPagerFragment(product)
     }
 
 
@@ -179,8 +179,14 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
 
         val uriArray =ArrayList<String>()
         uriArray.add(uri.toString())
-//        uriArray.add(uri.toString())
-        //      uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+              uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
 
         val products= Products(
             "Jeans",

@@ -5,17 +5,17 @@ import android.os.Parcelable
 
 
 data class Products(
-    val productType: String? = null,
-    val categoryName: String? = null,
-    val productName: String? = null,
-    val numRating: String? = null,
-    val inStock: Int = 0,
+    var productType: String? = null,
+    var categoryName: String? = null,
+    var productName: String? = null,
+    var numRating: String? = null,
+    var inStock: Int = 0,
     var avgRating: String? = null,
-    val productId: String? = null,
-    val productImage: List<String>? = null,
-    val priceDescription: String? = null,
-    val productPrice: Int = 0,
-    val productsDetails: List<ProductsDetails>? = null
+    var productId: String? = null,
+    var productImage: List<String>? = null,
+    var priceDescription: String? = null,
+    var productPrice: Int = 0,
+    var productsDetails: List<ProductsDetails>? = null
 ) : Model(), Parcelable {
     constructor(source: Parcel) : this(
         source.readString(),

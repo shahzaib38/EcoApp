@@ -1,5 +1,6 @@
 package image.crystalapps.kecommerce.ui.checkout
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -11,8 +12,12 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
+import image.crystalapps.kecommerce.customview.CustomCheckOutCartView
 import image.crystalapps.kecommerce.databinding.CheckOutDataBinding
 import image.crystalapps.kecommerce.model.Cart
+import image.crystalapps.kecommerce.model.Products
+import image.crystalapps.kecommerce.model.ProductsDetails
+import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 
 
@@ -40,26 +45,84 @@ class CheckOut : BaseActivity<CheckOutViewModel, CheckOutDataBinding>() {
           mCheckOutDatabinding = getViewDataBinding()
 
 
-        if(intent!=null){
-            val list= intent.getParcelableArrayListExtra<Cart>("array_list")
-            val total=intent.getIntExtra("total",0)
 
-            mCheckOutDatabinding?.run {
-                this.totalId.text=total.toString()
-            }?:throw NullPointerException("CheckOut DataBinding is null")
+        val cart =Cart(2,getProducts())
 
-            if (list != null) {
-                val clothesAdapter = CheckOutAdapter(mViewModel, mClothItemCallBack)
-                clothesAdapter.submitList(list)
-                mCheckOutDatabinding?.checkout?.run {
-                    this.layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    this.adapter = clothesAdapter }
+        val arraylist =ArrayList<Cart>()
 
-            } else  throw NullPointerException("CheckOut List is null")
-            } else  throw NullPointerException("Intent is null")
+        arraylist.add(cart)
+        arraylist.add(cart)
+        mCheckOutDatabinding?.customCheckOut?.setData(arraylist)
+
+
+//        if(intent!=null){
+//            val list= intent.getParcelableArrayListExtra<Cart>("array_list")
+//            val total=intent.getIntExtra("total",0)
+//
+//            mCheckOutDatabinding?.run {
+//                this.totalId.text=total.toString()
+//            }?:throw NullPointerException("CheckOut DataBinding is null")
+//
+//            if (list != null) {
+//                val clothesAdapter = CheckOutAdapter(mViewModel, mClothItemCallBack)
+//                clothesAdapter.submitList(list)
+//                mCheckOutDatabinding?.checkout?.run {
+//                    this.layoutManager =
+//                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//                    this.adapter = clothesAdapter }
+//
+//            } else  throw NullPointerException("CheckOut List is null")
+//            } else  throw NullPointerException("Intent is null")
 
     }
+
+
+
+
+    private fun getProducts() : Products {
+        val uri1: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+        val varietiesArray=ArrayList<Sizes>()
+        val varietiesArray1=ArrayList<Sizes>()
+
+        val varieties=  Sizes("" ,uri1.toString())
+        val varieties1=  Sizes("S",null)
+        val varieties2=  Sizes("M",null)
+        val varieties3=  Sizes("L",null)
+        val varieties4=  Sizes("XL",null)
+
+        varietiesArray.add(varieties)
+        varietiesArray1.add(varieties1)
+        varietiesArray1.add(varieties2)
+        varietiesArray1.add(varieties3)
+        varietiesArray1.add(varieties4)
+
+        val productDetails=ArrayList<ProductsDetails>()
+        val productsDetailsItem1 = ProductsDetails("Varietes",varietiesArray )
+        val productsDetailsItem2 = ProductsDetails("sizes",varietiesArray1 )
+
+        productDetails.add(productsDetailsItem1)
+        productDetails.add(productsDetailsItem2)
+        val uri: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+        val uriArray =ArrayList<String>()
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+
+
+        val products= Products(
+            "Jeans",
+            "men",
+            "Black T Shirt",
+            "12",
+            4,
+            "1.33",
+            "SM22446",
+            uriArray,
+            "Black T -shirt with design",
+            12200,
+            productDetails)
+        return products }
 
 
 

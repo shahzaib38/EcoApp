@@ -19,6 +19,8 @@ import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
+import org.mockito.Mock
+import org.mockito.Mockito
 
 
 @RunWith(AndroidJUnit4::class)
@@ -40,8 +42,8 @@ class ProductActivityTest {
     @Test
      fun checkProductIntentAtBeginning(){
         val intent =createProductIntent()
-        activityRule.launchActivity(intent)
-    }
+        activityRule.launchActivity(intent)}
+
 
     @Test
     fun checkProductPriceTextViewContent(){
@@ -51,8 +53,9 @@ class ProductActivityTest {
         onView(withId(R.id.product_price)).check(matches(withText("Product Price")))
         onView(withId(R.id.product_price)).check(matches(ViewMatchers.withEffectiveVisibility(Visibility.VISIBLE)))
 
-
     }
+
+
 
     @Test
     fun checkRecyclerviewContent(){

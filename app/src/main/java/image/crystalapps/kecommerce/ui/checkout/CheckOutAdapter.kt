@@ -9,7 +9,7 @@ import image.crystalapps.kecommerce.adapter.BaseAdapter
 import image.crystalapps.kecommerce.databinding.CheckOutItemDataBinding
 import image.crystalapps.kecommerce.model.Cart
 
-class CheckOutAdapter(val checkOutViewModel: CheckOutViewModel ,diffUtil: DiffUtil.ItemCallback<Cart>) :BaseAdapter<Cart ,CheckOutItemDataBinding>(diffUtil) {
+class CheckOutAdapter(diffUtil: DiffUtil.ItemCallback<Cart>) :BaseAdapter<Cart ,CheckOutItemDataBinding>(diffUtil) {
     override fun createBinding(
         inflater: LayoutInflater,
         parent: ViewGroup,
@@ -21,11 +21,11 @@ class CheckOutAdapter(val checkOutViewModel: CheckOutViewModel ,diffUtil: DiffUt
 
         binding.run {
             cart =item
-           viewModel =checkOutViewModel }
+ }
     }
 
     override fun onDataChanged(values: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
 

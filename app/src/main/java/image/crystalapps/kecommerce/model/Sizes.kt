@@ -3,7 +3,7 @@ package image.crystalapps.kecommerce.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Sizes(val text: String? = null, val imageUrl: String? = null) : BaseItem(), Parcelable {
+data class Sizes(var text: String? = null, var imageUrl: String? = null) : Model(), Parcelable {
     constructor(source: Parcel) : this(
         source.readString(),
         source.readString()
