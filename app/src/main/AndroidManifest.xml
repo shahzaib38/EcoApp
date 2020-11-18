@@ -19,6 +19,10 @@
         <activity android:name=".ui.clothes.ClothesActivity"/>
 
 
+        <activity android:name=".ui.address.AddressActivity">
+
+
+        </activity>
 
 
         <activity android:name=".ui.checkout.CheckOut">

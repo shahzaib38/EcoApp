@@ -10,20 +10,16 @@
             type="image.crystalapps.kecommerce.ui.checkout.CheckOutViewModel" />
     </data>
 
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackgroundDarkTranslucent"
+        >
 
-        <image.crystalapps.kecommerce.customview.CustomCheckOutCartView
-            android:id="@+id/customCheckOut"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
         <image.crystalapps.kecommerce.customview.ShippingAddressView
@@ -31,24 +27,53 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            />
-
-        <image.crystalapps.kecommerce.customview.PriceView
-            android:id="@+id/priceId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             />
+
+
+        <image.crystalapps.kecommerce.customview.CustomCheckOutCartView
+            android:id="@+id/customCheckOut"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/shippingaddress" />
+
+        <include
+            android:id="@+id/checkout_detailsId"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+
+            layout="@layout/checkout_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customCheckOut"
+            />
+
+        <include
+            android:id="@+id/proceedId"
+            layout="@layout/proceed_layout"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkout_detailsId" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
 
 </layout>
 
