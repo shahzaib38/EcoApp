@@ -2,6 +2,7 @@ package image.crystalapps.kecommerce.ui.checkout
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +15,7 @@ import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.customview.CustomCheckOutCartView
 import image.crystalapps.kecommerce.databinding.CheckOutDataBinding
-import image.crystalapps.kecommerce.model.Cart
-import image.crystalapps.kecommerce.model.Products
-import image.crystalapps.kecommerce.model.ProductsDetails
-import image.crystalapps.kecommerce.model.Sizes
+import image.crystalapps.kecommerce.model.*
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 
 
@@ -25,7 +23,7 @@ import image.crystalapps.kecommerce.ui.base.BaseActivity
 class CheckOut : BaseActivity<CheckOutViewModel, CheckOutDataBinding>() {
 
 
-    private val mViewModel by viewModels<CheckOutViewModel>()
+    private val mViewModel by  viewModels<CheckOutViewModel>()
        private var mCheckOutDatabinding :CheckOutDataBinding?=null
     override fun getBindingVariable(): Int =BR.viewModel
     override fun getLayoutId(): Int = R.layout.checkout_layout
@@ -46,36 +44,21 @@ class CheckOut : BaseActivity<CheckOutViewModel, CheckOutDataBinding>() {
 
 
 
-        val cart =Cart(2,getProducts())
-
-        val arraylist =ArrayList<Cart>()
-
-        arraylist.add(cart)
-        arraylist.add(cart)
-        mCheckOutDatabinding?.customCheckOut?.setData(arraylist)
 
 
-//        if(intent!=null){
-//            val list= intent.getParcelableArrayListExtra<Cart>("array_list")
-//            val total=intent.getIntExtra("total",0)
-//
-//            mCheckOutDatabinding?.run {
-//                this.totalId.text=total.toString()
-//            }?:throw NullPointerException("CheckOut DataBinding is null")
-//
-//            if (list != null) {
-//                val clothesAdapter = CheckOutAdapter(mViewModel, mClothItemCallBack)
-//                clothesAdapter.submitList(list)
-//                mCheckOutDatabinding?.checkout?.run {
-//                    this.layoutManager =
-//                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//                    this.adapter = clothesAdapter }
-//
-//            } else  throw NullPointerException("CheckOut List is null")
-//            } else  throw NullPointerException("Intent is null")
+     //   if(intent==null){
+            val cartCheckOut= intent.getParcelableExtra<CartCheckOut>("cartCheckOutBundle")
+
+            mCheckOutDatabinding?.run {
+
+                this.cartCheckOut =cartCheckOut
+
+            }?:throw NullPointerException("Cart is null")
+
+
+
 
     }
-
 
 
 

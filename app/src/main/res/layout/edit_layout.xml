@@ -3,19 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data >
 
+
+        <variable
+            name="editBindViewModel"
+            type="image.crystalapps.kecommerce.ui.address.AddressViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <EditText
             android:id="@+id/fullNameId"
+            android:text="@={editBindViewModel.fullNameLiveData}"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="12dp"
@@ -35,6 +39,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:text="@={editBindViewModel.mobileNumber}"
             android:hint="Mobile Number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -48,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-
+            android:text="@{editBindViewModel.provinceLiveData}"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:hint="Province"
@@ -63,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-
+            android:text="@{editBindViewModel.cityLiveData}"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:hint="City"
@@ -78,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-
+            android:text="@{editBindViewModel.areaLiveData}"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:hint="Area"
@@ -97,11 +102,11 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:hint="Address"
+            android:text="@{editBindViewModel.addressLiveData}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/areaId" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="proceedViewModel"
+            type="image.crystalapps.kecommerce.model.CartCheckOut" />
     </data>
 
 
@@ -23,7 +26,7 @@
 
                 android:layout_marginStart="16dp"
 
-                android:text="Total Amount : Rs 1200"
+                android:text="@{proceedViewModel.totalItem}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

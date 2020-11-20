@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
 
     <data class="CheckOutDataBinding">
 
         <variable
             name="viewModel"
             type="image.crystalapps.kecommerce.ui.checkout.CheckOutViewModel" />
+
+        <variable
+            name="cartCheckOut"
+            type="image.crystalapps.kecommerce.model.CartCheckOut" />
+
     </data>
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,11 +49,11 @@
 
         <image.crystalapps.kecommerce.customview.CustomCheckOutCartView
             android:id="@+id/customCheckOut"
-
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@color/white"
+            cartList="@{cartCheckOut.arrayList }"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -51,7 +64,7 @@
             android:layout_marginTop="12dp"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
-
+            bind:checkOutDetailViewModel="@{cartCheckOut}"
             layout="@layout/checkout_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -59,22 +72,24 @@
             app:layout_constraintTop_toBottomOf="@+id/customCheckOut"
             />
 
-        <include
-            android:id="@+id/proceedId"
-            layout="@layout/proceed_layout"
-            android:layout_width="0dp"
 
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkout_detailsId" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-
+        <include
+            android:id="@+id/proceedId"
+            layout="@layout/proceed_layout"
+            android:layout_width="match_parent"
+            bind:proceedViewModel="@{cartCheckOut}"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkout_detailsId" />
+    </FrameLayout>
 </layout>
 
 

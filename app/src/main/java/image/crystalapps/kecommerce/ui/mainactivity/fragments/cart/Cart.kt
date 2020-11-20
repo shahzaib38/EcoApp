@@ -1,5 +1,7 @@
 package image.crystalapps.kecommerce.ui.mainactivity.fragments.cart
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,14 +16,21 @@ import image.crystalapps.kecommerce.HiltTestActivity
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.CartFragmentBinding
 import image.crystalapps.kecommerce.extensions.multiple
+import image.crystalapps.kecommerce.model.*
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.ui.base.BaseFragment
+import image.crystalapps.kecommerce.ui.checkout.CheckOut
 import kotlinx.android.synthetic.main.fragment_cart.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator {
 
-     private var mCartFragmentBinding :CartFragmentBinding?=null
+
+
+
+    private var mCartFragmentBinding :CartFragmentBinding?=null
 
       private val mClothItemCallBack = object : DiffUtil.ItemCallback<Cart>(){
         override fun areItemsTheSame(oldItem: Cart, newItem: Cart):
@@ -76,16 +85,70 @@ class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator 
 
     }
 
-    override fun checkOut() {
-        val totalText=   totalId.text
-        Toast.makeText(requireContext() ,totalText.toString() ,Toast.LENGTH_LONG).show()
-
-//        val intent = Intent(requireContext() ,CheckOut::class.java)
-//        intent.putExtra("array_list" ,arrayList)
-//        intent.putExtra("total" ,total)
-//        startActivity(intent)
-
+    fun checkout(arrayList :ArrayList<Cart>){
     }
+
+    override fun checkOut() {
+
+        val intent = Intent(requireContext() , CheckOut::class.java)
+      val cart =  Cart(2 ,getProducts())
+        val arrayList =ArrayList<Cart>()
+          arrayList.add(cart)
+        arrayList.add(cart)
+        val cartCheckOut =   CartCheckOut(arrayList ,"5000")
+        intent.putExtra("cartCheckOutBundle", cartCheckOut)
+        startActivity(intent)
+    }
+
+
+
+
+
+
+    private fun getProducts() : Products {
+        val uri1: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+        val varietiesArray=ArrayList<Sizes>()
+        val varietiesArray1=ArrayList<Sizes>()
+
+        val varieties=  Sizes("" ,uri1.toString())
+        val varieties1=  Sizes("S",null)
+        val varieties2=  Sizes("M",null)
+        val varieties3=  Sizes("L",null)
+        val varieties4=  Sizes("XL",null)
+
+        varietiesArray.add(varieties)
+        varietiesArray1.add(varieties1)
+        varietiesArray1.add(varieties2)
+        varietiesArray1.add(varieties3)
+        varietiesArray1.add(varieties4)
+
+        val productDetails=ArrayList<ProductsDetails>()
+        val productsDetailsItem1 = ProductsDetails("Varietes",varietiesArray )
+        val productsDetailsItem2 = ProductsDetails("sizes",varietiesArray1 )
+
+        productDetails.add(productsDetailsItem1)
+        productDetails.add(productsDetailsItem2)
+        val uri: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
+
+        val uriArray =ArrayList<String>()
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+        uriArray.add(uri.toString())
+
+
+        val products= Products(
+            "Jeans",
+            "men",
+            "Black T Shirt",
+            "12",
+            4,
+            "1.33",
+            "SM22446",
+            uriArray,
+            "Black T -shirt with design",
+            12200,
+            productDetails)
+        return products }
 
 
 }
