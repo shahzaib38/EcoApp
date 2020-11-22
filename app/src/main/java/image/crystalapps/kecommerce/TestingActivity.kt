@@ -2,6 +2,8 @@ package image.crystalapps.kecommerce
 
 import android.app.Activity
 import android.os.Bundle
+import java.util.concurrent.locks.Lock
+import java.util.concurrent.locks.LockSupport
 
 class TestingActivity: Activity() {
 
@@ -11,14 +13,29 @@ class TestingActivity: Activity() {
         setContentView(R.layout.activity_demo)
 
 
-        intent.getStringExtra("parcel")
 
 
+        foo()
 
     }
 
 
 
+    fun ordinaryFunction(block : ()->Unit){
+        println("hi")
+    }
+
+
+    fun foo(){
+        println("1")
+        ordinaryFunction {
+            return@ordinaryFunction
+
+        }
+
+
+        println("2")
+    }
 
 
 

@@ -12,10 +12,17 @@
 
     </data>
 
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
+        android:background="#000"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -26,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorBackgroundDarkTranslucent"
-
                 >
 
 
@@ -47,12 +53,11 @@
 
                 <FrameLayout
                     android:id="@+id/recentContainer"
-                    android:layout_width="0dp"
-                    android:layout_height="600dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorBackgroundLight"
                     app:layout_constraintBottom_toTopOf="@+id/popularContainer"
                     android:layout_marginTop="12dp"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +66,7 @@
                 <FrameLayout
                     android:id="@+id/popularContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorBackgroundLight"
                     app:layout_constraintBottom_toTopOf="@+id/blogContainer"
 

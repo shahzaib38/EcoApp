@@ -24,6 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SubTotal ($ Items)"
+            subTotal="@{checkOutDetailViewModel.arrayList.size()}"
+
             android:layout_margin="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +45,7 @@
             android:id="@+id/totalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs 1400"
+            android:text="@{checkOutDetailViewModel.totalItem}"
             android:layout_margin="12dp"
 
             app:layout_constraintEnd_toEndOf="parent"

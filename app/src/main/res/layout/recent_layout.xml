@@ -3,8 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="RecentProductDataBinding">
-
-
         <variable
             name="productsItem"
             type="image.crystalapps.kecommerce.model.Products" />
@@ -13,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/latest"
@@ -41,9 +39,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recent_recyclerView"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:minHeight="170dp"
+            android:paddingBottom="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

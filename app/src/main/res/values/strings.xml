@@ -25,7 +25,6 @@
     <string name="user_name">User Name</string>
 
 
-
     <string name="value_any_category">All food</string>
     <string name="value_any_city">Anywhere</string>
     <string name="value_any_price">Any price</string>
@@ -62,7 +61,6 @@
     <string name="hint_review">How was your experience?</string>
     <string name="submit">Submit</string>
     <string name="filter_add_review">Add review</string>
-
 
 
     <string-array name="categories">
@@ -153,8 +151,8 @@
 
 
     <!--- Price High To Low -->
-     <string name="price_highToLow">Price (High To Low)</string>
-     <string name="price_lowToHigh">Price (Low To High)</string>
+    <string name="price_highToLow">Price (High To Low)</string>
+    <string name="price_lowToHigh">Price (Low To High)</string>
     <string name="rating_highToLow">Rating High to Low</string>
     <string name="user_name_hint">User Name</string>
     <string name="phone_number">Phone Number</string>

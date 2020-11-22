@@ -30,7 +30,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-       // testInstrumentationRunner "image.crystalapps.kecommerce.CustomTestRunner"
+        // testInstrumentationRunner "image.crystalapps.kecommerce.CustomTestRunner"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -56,7 +56,8 @@ android {
     }
 
 
-    dataBinding { enabled true
+    dataBinding {
+        enabled true
 
     }
     kotlinOptions {
@@ -94,11 +95,9 @@ dependencies {
     //
 
 
-
     def fragment_version = "1.2.5"
     // ...
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
-
 
 
     // Hilt testing

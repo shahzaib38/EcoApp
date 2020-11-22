@@ -1,9 +1,7 @@
 package image.crystalapps.kecommerce.customview
 
-import android.content.Context
 import android.net.Uri
 import android.widget.TextView
-import androidx.annotation.DimenRes
 import androidx.databinding.BindingAdapter
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
@@ -11,8 +9,6 @@ import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.extensions.sum
-import image.crystalapps.kecommerce.model.Cart
-import java.math.BigDecimal
 
 
 @BindingAdapter("customImageUrl")
@@ -70,5 +66,19 @@ fun totalPrice(totalId : TextView, totalPrice : String?){
 fun totalItems(totalItemTextView: TextView, totalitems :Int?){
     val totalText=  totalitems?.let { it.sum() }?: "Items: 0"
     totalItemTextView.text =totalText
+
 }
 
+
+@BindingAdapter("subTotal")
+fun subTotal(totalTextView :TextView ,itemTotal :Int){
+
+    if(itemTotal<=1){
+        totalTextView.text = "SubTotal ($itemTotal Item)"
+    }else{
+        totalTextView.text = "SubTotal ($itemTotal Items)"
+
+    }
+
+
+}
