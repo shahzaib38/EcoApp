@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystala.MainActivity
 import image.crystalapps.kecommerce.BR
@@ -20,6 +22,7 @@ import image.crystalapps.kecommerce.databinding.HomeFragmentBinding
 import image.crystalapps.kecommerce.databinding.replaceOnce
 import image.crystalapps.kecommerce.listeners.FragmentVisibilityListener
 import image.crystalapps.kecommerce.model.Categories
+import image.crystalapps.kecommerce.model.NotificationBean
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.clothes.ClothesActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.popular.PopularFragment
@@ -27,6 +30,7 @@ import image.crystalapps.kecommerce.ui.mainactivity.fragments.products.BlogFragm
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.recent.RecentProducts
 import image.crystalapps.kecommerce.utils.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.sql.Date
 
 
 @AndroidEntryPoint
@@ -67,7 +71,16 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
         mViewModel.setUpCategories()
         initFragments()
         setHasOptionsMenu(true)
-        setUpRecyclerView() }
+        setUpRecyclerView()
+
+
+//        val date =Date(2019,1,2)
+//
+//        Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+//            .collection("notifications")
+//            .add(NotificationBean("Shahzaib","This is shahzaib Lashari Inform","https://firebasestorage.googleapis.com/v0/b/delicious-food-21577.appspot.com/o/jackets.jpg?alt=media&token=0fcbe68f-9444-4315-ae8a-b36397409604"))
+
+    }
 
  private fun setUpRecyclerView(){
         mViewModel.categoriesLiveData.observe(viewLifecycleOwner, Observer {list->

@@ -1,26 +1,18 @@
 package image.crystalapps.kecommerce.data
 
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.data.database.LocalDataBaseManager
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
 import image.crystalapps.kecommerce.data.database.prefs.SharedPreferenceEntry
-import image.crystalapps.kecommerce.model.Cart
-import image.crystalapps.kecommerce.model.Filter
-import image.crystalapps.kecommerce.model.UserProfile
+import image.crystalapps.kecommerce.model.*
 import image.crystalapps.kecommerce.utils.FirebaseCart
 import image.crystalapps.kecommerce.utils.ProductLiveData
 import image.crystalapps.kecommerce.utils.QueryLiveData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -140,4 +132,13 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
         FirebaseCart.decrement(product)
         //    }
     }
+
+
+    override  fun getNotification():QueryLiveData<NotificationBean>{
+        val documentRef=   Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+            .collection("notifications").limit(2)
+        val productLiveData = QueryLiveData(documentRef,NotificationBean::class.java)
+        documentRef.addSnapshotListener(productLiveData)
+        return productLiveData }
+
 }

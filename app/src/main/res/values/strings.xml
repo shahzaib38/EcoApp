@@ -24,6 +24,7 @@
     <string name="successfull_login">SuccessFully Login</string>
     <string name="user_name">User Name</string>
 
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
     <string name="value_any_category">All food</string>
     <string name="value_any_city">Anywhere</string>

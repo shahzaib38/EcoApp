@@ -21,7 +21,7 @@
 
     <item
         android:icon="@drawable/notification_icon"
-        android:id="@id/notification_fragment"
+        android:id="@id/notificationFragment"
         android:title="Notification"
         />
 

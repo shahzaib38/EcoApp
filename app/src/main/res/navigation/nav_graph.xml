@@ -70,14 +70,10 @@
         android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.profile.Profile"
         android:label="Profile"
         />
-
-
-
-    <fragment android:id="@+id/notification_fragment"
+    <fragment
+        android:id="@+id/notificationFragment"
         android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.notification.NotificationFragment"
-        android:label="Notification"
-        />
-
+        android:label="NotificationFragment" />
 
 
 </navigation>
