@@ -13,7 +13,7 @@ import image.crystalapps.kecommerce.data.DataManager
 import kotlinx.coroutines.cancel
 import java.lang.ref.WeakReference
 
-abstract class BaseViewModel<N>  constructor(val baseDataManager : DataManager) :  ViewModel(){
+abstract class BaseViewModel<N>  constructor(val baseDataManager : BaseRepository) :  ViewModel(){
 
 
 

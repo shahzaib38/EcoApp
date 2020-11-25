@@ -5,11 +5,12 @@ import androidx.lifecycle.*
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.NotificationBean
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class NotificationViewModel  @ViewModelInject constructor(val dataManager: DataManager) :
-    BaseViewModel<NotificationNavigator>(dataManager){
+class NotificationViewModel  @ViewModelInject constructor(private val mainRepository: MainRepository) :
+    BaseViewModel<NotificationNavigator>(mainRepository){
 
 
 
@@ -18,7 +19,7 @@ class NotificationViewModel  @ViewModelInject constructor(val dataManager: DataM
 
 
     val notificationLiveData =mUpdateEvent.switchMap {
-        dataManager.getNotification().distinctUntilChanged().switchMap {data->
+        mainRepository.getNotification().distinctUntilChanged().switchMap {data->
             filterData(data) } }
 
 

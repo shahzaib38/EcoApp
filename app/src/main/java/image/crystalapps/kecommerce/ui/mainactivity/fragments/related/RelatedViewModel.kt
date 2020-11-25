@@ -6,11 +6,12 @@ import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.Clothes
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.FirebaseUtils
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class RelatedViewModel   @ViewModelInject  constructor(val dataManager: DataManager)  :BaseViewModel<RelatedNavigator>(dataManager) {
+class RelatedViewModel   @ViewModelInject  constructor(val mainRepository: MainRepository)  :BaseViewModel<RelatedNavigator>(mainRepository) {
 
 
 
@@ -19,7 +20,7 @@ class RelatedViewModel   @ViewModelInject  constructor(val dataManager: DataMana
 
 
     val allProductsLiveData =mUpdateEvent.switchMap {
-        dataManager.loadRelatedProducts("Men" ,"T-Shirt").distinctUntilChanged().switchMap {data->
+        mainRepository.loadRelatedProducts("Men" ,"T-Shirt").distinctUntilChanged().switchMap {data->
             filterData(data)
 
         }

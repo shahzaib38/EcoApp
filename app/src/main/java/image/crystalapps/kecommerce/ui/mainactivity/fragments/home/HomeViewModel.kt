@@ -11,14 +11,15 @@ import image.crystalapps.kecommerce.model.Categories
 import image.crystalapps.kecommerce.model.Clothes
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.ui.clothes.CLothesNavigator
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.FirebaseUtils
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeViewModel @ViewModelInject constructor(private val dataManager: DataManager):
-            BaseViewModel<HomeNavigator>(dataManager) {
+class HomeViewModel @ViewModelInject constructor(private val mainRepository: MainRepository):
+            BaseViewModel<HomeNavigator>(mainRepository) {
 
     val mUpdateEvent =MutableLiveData<Boolean>(false)
 
@@ -40,7 +41,7 @@ class HomeViewModel @ViewModelInject constructor(private val dataManager: DataMa
 
 
    val allProductsLiveData =mUpdateEvent.switchMap {
-       dataManager.getAllProducts().distinctUntilChanged().switchMap {data->
+       mainRepository.getAllProducts().distinctUntilChanged().switchMap {data->
            filterData(data)
 
      }

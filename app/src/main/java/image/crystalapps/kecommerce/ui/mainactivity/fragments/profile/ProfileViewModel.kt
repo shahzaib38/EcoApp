@@ -9,10 +9,11 @@ import androidx.lifecycle.switchMap
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.UserProfile
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.Result
 
 
-class ProfileViewModel  @ViewModelInject constructor(val dataManager: DataManager) :BaseViewModel<ProfileNavigator>(dataManager) {
+class ProfileViewModel  @ViewModelInject constructor(val mainRepository: MainRepository) :BaseViewModel<ProfileNavigator>(mainRepository) {
 
 
     fun openProfileDialog(view: View ){
@@ -34,7 +35,7 @@ class ProfileViewModel  @ViewModelInject constructor(val dataManager: DataManage
 
 
     fun getUserProfile(): LiveData<UserProfile> {
-        return  dataManager.getUserProfile("7m5pHZ89AecrwnlLKjuoLlZfpMh1").distinctUntilChanged().switchMap {
+        return  mainRepository.getUserProfile("7m5pHZ89AecrwnlLKjuoLlZfpMh1").distinctUntilChanged().switchMap {
                 data->
             filterUserProfileData(data)
         }

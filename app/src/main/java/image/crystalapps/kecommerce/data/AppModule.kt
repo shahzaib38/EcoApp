@@ -36,6 +36,7 @@ class AppModule {
 
 
 
+  @Singleton
   @Provides
   fun provideFirebaseManager(instanceIdManager: InstanceIdManager)  :FirebaseManager{
     return FirebaseManagerImpl(instanceIdManager) }

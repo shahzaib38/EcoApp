@@ -14,6 +14,10 @@ import image.crystalapps.kecommerce.R
 import javax.inject.Inject
 import androidx.navigation.NavController
 import androidx.navigation.ui.*
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +33,8 @@ import image.crystalapps.kecommerce.databinding.snackBarSetup
 import image.crystalapps.kecommerce.model.*
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 import image.crystalapps.kecommerce.ui.mainactivity.MainViewModel
+import image.crystalapps.kecommerce.workers.MyCoroutineWorker
+import image.crystalapps.kecommerce.workers.NotificationWorkManager
 import kotlinx.android.synthetic.main.drawerappbar.*
 
 
@@ -64,16 +70,6 @@ class MainActivity : BaseActivity<MainViewModel, MainDataBinding>(){
         setUpNavigationComponent()
         mSharedPreferenceEntry = mSaveTokenSharedPreferenceHelper.getTokenInformation()
         setUpUi()
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -116,7 +112,7 @@ class MainActivity : BaseActivity<MainViewModel, MainDataBinding>(){
     }
 
     // DrawerLayout Functions
-    private fun UnlockDrawer(){
+    private fun  UnlockDrawer(){
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED) }
     override fun onResume() {
         super.onResume()

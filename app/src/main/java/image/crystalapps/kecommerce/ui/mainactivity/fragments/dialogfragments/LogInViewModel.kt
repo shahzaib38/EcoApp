@@ -6,10 +6,11 @@ import com.google.firebase.auth.FirebaseAuth
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.data.Event
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import javax.inject.Inject
 
-class LogInViewModel @ViewModelInject constructor(val dataManager: DataManager) :
-    BaseViewModel<LogInNavigator>(dataManager) {
+class LogInViewModel @ViewModelInject constructor(val mainRepository : MainRepository) :
+    BaseViewModel<LogInNavigator>(mainRepository) {
 
     //LiveData
     val _snackBarText = MutableLiveData<Event<Int>>()

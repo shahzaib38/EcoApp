@@ -8,7 +8,7 @@ import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class ProductViewModel @ViewModelInject constructor(private val dataManager: DataManager) :
+class ProductViewModel @ViewModelInject constructor(private val dataManager: ProductRepository) :
     BaseViewModel<SelectionNavigator>(dataManager) {
 
 
@@ -17,13 +17,38 @@ class ProductViewModel @ViewModelInject constructor(private val dataManager: Dat
     fun addToCart(){
     getNavigator().addToCart()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     fun addToCart(product: Cart) {
 
-        viewModelScope.launch {
-            dataManager.addToCart(product)
-        }
+//        viewModelScope.launch {
+//            dataManager.addToCart(product)
+//        }
 
         }
 

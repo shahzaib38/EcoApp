@@ -5,11 +5,12 @@ import androidx.lifecycle.*
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
 
-class PopularViewModel  @ViewModelInject constructor (val dataManager: DataManager) :BaseViewModel<PopularNavigator>(dataManager) {
+class PopularViewModel  @ViewModelInject constructor (val mainRepository: MainRepository) :BaseViewModel<PopularNavigator>(mainRepository) {
 
 
 
@@ -19,7 +20,7 @@ class PopularViewModel  @ViewModelInject constructor (val dataManager: DataManag
 
 
     val allProductsLiveData =mUpdateEvent.switchMap {
-        dataManager.getAllProducts().distinctUntilChanged().switchMap {data->
+        mainRepository.getAllProducts().distinctUntilChanged().switchMap {data->
             filterData(data)
 
         }

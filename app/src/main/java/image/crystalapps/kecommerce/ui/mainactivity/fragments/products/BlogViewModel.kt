@@ -7,11 +7,12 @@ import image.crystalapps.kecommerce.model.Categories
 import image.crystalapps.kecommerce.model.Clothes
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.FirebaseUtils
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class BlogViewModel  @ViewModelInject  constructor(val dataManager :DataManager) :BaseViewModel<BlogNavigator>(dataManager ) {
+class BlogViewModel  @ViewModelInject  constructor(val mainRepository: MainRepository) :BaseViewModel<BlogNavigator>(mainRepository ) {
 
 
 
@@ -36,7 +37,7 @@ class BlogViewModel  @ViewModelInject  constructor(val dataManager :DataManager)
 
 
     val allProductsLiveData =mUpdateEvent.switchMap {
-        dataManager.getAllProducts().distinctUntilChanged().switchMap {data->
+        mainRepository.getAllProducts().distinctUntilChanged().switchMap {data->
             filterData(data)
 
         }

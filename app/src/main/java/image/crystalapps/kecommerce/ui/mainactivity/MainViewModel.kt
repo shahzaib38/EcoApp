@@ -4,6 +4,8 @@ import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.data.DataManager
@@ -13,8 +15,8 @@ import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class MainViewModel @ViewModelInject constructor(val dataManager: DataManager ):
-    BaseViewModel<MainNavigator>(dataManager) {
+class MainViewModel @ViewModelInject constructor(val mainRepository : MainRepository ):
+    BaseViewModel<MainNavigator>(mainRepository) {
 
 
     //   val product =Transformations.switchMap(  allProductsLiveData,dataManager.getAllProducts().value)
@@ -45,7 +47,7 @@ class MainViewModel @ViewModelInject constructor(val dataManager: DataManager ):
 
 
     fun getUserProfile():LiveData<UserProfile> {
-  return  dataManager.getUserProfile("7m5pHZ89AecrwnlLKjuoLlZfpMh1").distinctUntilChanged().switchMap {
+  return  mainRepository.getUserProfile("7m5pHZ89AecrwnlLKjuoLlZfpMh1").distinctUntilChanged().switchMap {
         data->
         filterUserProfileData(data)
     }
@@ -65,7 +67,7 @@ class MainViewModel @ViewModelInject constructor(val dataManager: DataManager ):
 
 
     val allProductsLiveData =mUpdateEvent.switchMap {
-       dataManager.getAllProducts().distinctUntilChanged().switchMap {
+        mainRepository.getAllProducts().distinctUntilChanged().switchMap {
          filterData(it)
      }
 
@@ -125,7 +127,7 @@ class MainViewModel @ViewModelInject constructor(val dataManager: DataManager ):
            if (mCurrentUser!=null) {
            //    _userProfile.value = mCurrentUser
                _snackBarText.value = Event(R.string.successfull_login)
-                   dataManager.registerInstanceIdManager(token)
+                   mainRepository.registerInstanceIdManager(token)
 
            }
        } else{
@@ -134,7 +136,6 @@ class MainViewModel @ViewModelInject constructor(val dataManager: DataManager ):
        }
 
     }
-
 
 
 }

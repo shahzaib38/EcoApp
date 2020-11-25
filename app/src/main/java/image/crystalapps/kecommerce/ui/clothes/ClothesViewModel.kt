@@ -9,7 +9,7 @@ import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class ClothesViewModel  @ViewModelInject constructor(private val dataManager: DataManager) : BaseViewModel<CLothesNavigator>(dataManager) {
+class ClothesViewModel  @ViewModelInject constructor(private val clothesRepository: ClothesRepository) : BaseViewModel<CLothesNavigator>(clothesRepository) {
 
 
     val filter =MutableLiveData<Filter>()
@@ -17,9 +17,9 @@ class ClothesViewModel  @ViewModelInject constructor(private val dataManager: Da
     fun showFilterDialog(){ getNavigator().showFilterDialog() }
     fun showSortDialog(){ getNavigator().showSortDialog() }
 
-    val allProductsLiveData =filter.switchMap {filter->
-            dataManager.getClothesData(filter).distinctUntilChanged().switchMap { data ->
-                filterData(data)} }
+//    val allProductsLiveData =filter.switchMap {filter->
+//            dataManager.getClothesData(filter).distinctUntilChanged().switchMap { data ->
+//                filterData(data)} }
 
     private fun filterData(data : Result<List<Products>>) :LiveData<List<Products>> {
         val result = MutableLiveData<List<Products>>()

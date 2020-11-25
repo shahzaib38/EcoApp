@@ -5,11 +5,12 @@ import androidx.lifecycle.*
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
+import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.Result
 import kotlinx.coroutines.launch
 
-class CartViewModel @ViewModelInject constructor(val dataManager: DataManager):
-    BaseViewModel<CartNavigator>(dataManager){
+class CartViewModel @ViewModelInject constructor(val mainRepository : MainRepository):
+    BaseViewModel<CartNavigator>(mainRepository){
 
 
 
@@ -23,16 +24,16 @@ class CartViewModel @ViewModelInject constructor(val dataManager: DataManager):
 
 
     val allCartLiveDataManager =mUpdateEvent.switchMap {
-        dataManager.getCartItem().distinctUntilChanged().switchMap {data->
+        mainRepository.getCartItem().distinctUntilChanged().switchMap {data->
             filterData(data)
         }}
 
 
     fun increment(cart :Cart){
-        dataManager.addToCart(cart) }
+        mainRepository.addToCart(cart) }
 
     fun decrement(cart :Cart){
-        dataManager.decrement(cart) }
+        mainRepository.decrement(cart) }
 
     fun checkOut(){
         getNavigator().checkOut() }

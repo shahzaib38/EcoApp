@@ -114,20 +114,20 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
 //    }
 
   override  fun getCartItem():QueryLiveData<Cart>{
-      val documentRef=   Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
-          .collection("Cart").limit(2)
+        val documentRef=   Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+            .collection("Cart").limit(2)
 
-      val productLiveData = QueryLiveData(documentRef,Cart::class.java)
+        val productLiveData = QueryLiveData(documentRef,Cart::class.java)
         documentRef.addSnapshotListener(productLiveData)
         return productLiveData }
 
     override  fun addToCart(product: Cart) {
-  //      withContext(ioDispatcher){
-            FirebaseCart.addToCart(product)
-    //    }
+        //      withContext(ioDispatcher){
+        FirebaseCart.addToCart(product)
+        //    }
     }
 
-   override fun decrement(product: Cart) {
+    override fun decrement(product: Cart) {
         //      withContext(ioDispatcher){
         FirebaseCart.decrement(product)
         //    }

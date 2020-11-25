@@ -7,7 +7,7 @@ import image.crystalapps.kecommerce.model.Address
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 
 
-class AddressViewModel @ViewModelInject constructor(val  dataManager: DataManager) :BaseViewModel<AddressNavigator>(dataManager) {
+class AddressViewModel @ViewModelInject constructor(val  addressRepository: AddressRepository) :BaseViewModel<AddressNavigator>(addressRepository) {
 
     //User Name LiveData
     val _FullNameLiveData =MutableLiveData<String>("")

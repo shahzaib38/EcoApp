@@ -10,6 +10,11 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import image.crystala.MainActivity
@@ -17,6 +22,8 @@ import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.data.ClientApplication
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.data.database.prefs.SharedPreferenceEntry
+import image.crystalapps.kecommerce.model.NotificationBean
+import image.crystalapps.kecommerce.workers.NotificationWorkManager
 
 class FirebaseIdService : FirebaseMessagingService() {
 
@@ -49,7 +56,13 @@ class FirebaseIdService : FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
-            sendUpdateNotification(remoteMessage.notification!!.title, remoteMessage.notification!!.body)
+                
+            Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+                .collection("notifications")
+                .add(NotificationBean(it.title,it.body,"https://firebasestorage.googleapis.com/v0/b/delicious-food-21577.appspot.com/o/jackets.jpg?alt=media&token=0fcbe68f-9444-4315-ae8a-b36397409604"))
+    
+    
+
         }
 
 

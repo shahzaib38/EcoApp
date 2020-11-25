@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 
-class SortViewModel @ViewModelInject constructor(val dataManager: DataManager) :
-    BaseViewModel<SortNavigator>(dataManager) {
+class SortViewModel @ViewModelInject constructor(val sortRepository: SortRepository) :
+    BaseViewModel<SortNavigator>(sortRepository) {
 
 }
