@@ -2,6 +2,7 @@ package image.crystalapps.kecommerce.data
 
 import image.crystalapps.kecommerce.data.database.prefs.SharedPreferenceEntry
 import image.crystalapps.kecommerce.model.*
+import image.crystalapps.kecommerce.utils.AddressLiveData
 import image.crystalapps.kecommerce.utils.ProductLiveData
 import image.crystalapps.kecommerce.utils.QueryLiveData
 
@@ -20,5 +21,5 @@ interface DataManager{
     fun getUserProfile(userId :String) : ProductLiveData<UserProfile>
     fun loadRelatedProducts(categoryNaem : String ,productValue :String):  QueryLiveData<Products>
     fun getNotification():QueryLiveData<NotificationBean>
-
+    fun getAddress(): AddressLiveData<Address>
 }

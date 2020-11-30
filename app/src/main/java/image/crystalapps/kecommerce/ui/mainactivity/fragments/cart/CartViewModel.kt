@@ -2,7 +2,6 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.cart
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.ui.mainactivity.MainRepository

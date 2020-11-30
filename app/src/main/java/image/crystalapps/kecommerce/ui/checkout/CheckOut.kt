@@ -2,33 +2,34 @@ package image.crystalapps.kecommerce.ui.checkout
 
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
-import image.crystalapps.kecommerce.customview.CustomCheckOutCartView
+import image.crystalapps.kecommerce.databinding.AddressDataBinding
 import image.crystalapps.kecommerce.databinding.CheckOutDataBinding
+import image.crystalapps.kecommerce.databinding.ClothesDataBinding
+import image.crystalapps.kecommerce.databinding.addressContent
 import image.crystalapps.kecommerce.model.*
+import image.crystalapps.kecommerce.ui.address.AddressViewModel
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 
+import image.crystalapps.kecommerce.ui.checkout.CheckOutViewModel
+import image.crystalapps.kecommerce.ui.clothes.ClothesViewModel
 
 @AndroidEntryPoint
-class CheckOut : BaseActivity<CheckOutViewModel, CheckOutDataBinding>() {
+class CheckOut : BaseActivity<CheckOutViewModel , CheckOutDataBinding>() ,CheckOutNavigator {
+
+
 
 
     private val mViewModel by  viewModels<CheckOutViewModel>()
-       private var mCheckOutDatabinding :CheckOutDataBinding?=null
     override fun getBindingVariable(): Int =BR.viewModel
     override fun getLayoutId(): Int = R.layout.checkout_layout
     override fun getViewModel(): CheckOutViewModel =mViewModel
-
+    private var mCheckOutDatabinding :CheckOutDataBinding?=null
 
     //Diff Call Back
     private val mClothItemCallBack = object : DiffUtil.ItemCallback<Cart>(){
@@ -41,22 +42,31 @@ class CheckOut : BaseActivity<CheckOutViewModel, CheckOutDataBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
           mCheckOutDatabinding = getViewDataBinding()
-
+        getViewModel().setNavigator(this)
 
 
 
 
      //   if(intent==null){
-            val cartCheckOut= intent.getParcelableExtra<CartCheckOut>("cartCheckOutBundle")
+//            val cartCheckOut= intent.getParcelableExtra<CartCheckOut>("cartCheckOutBundle")
+//
+//            mCheckOutDatabinding?.run {
+//
+//                this.cartCheckOut =cartCheckOut
+//
+//            }?:throw NullPointerException("Cart is null")
+//
 
-            mCheckOutDatabinding?.run {
 
-                this.cartCheckOut =cartCheckOut
-
-            }?:throw NullPointerException("Cart is null")
-
+//        Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1").collection("address")
+//            .document("usersAddress")
+//            .set(Address("Block 4 ","Sindh","Karachi","Bin Qasim Town","03122189474","Shahzaib"))
 
 
+        mViewModel.addressLiveData.observe(this , Observer {address->
+            mCheckOutDatabinding?.root?.run {
+                this.addressContent(address)
+            } })
 
     }
 

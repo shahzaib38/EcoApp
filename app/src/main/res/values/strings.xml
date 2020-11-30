@@ -164,5 +164,8 @@
     <string name="remove_button">Remove</string>
     <string name="quantity_label">QTY:</string>
     <string name="default_product_quantity">1</string>
+    <string name="validphone">must Provide Valid Phone Number</string>
+    <string name="fullyQualifeddName">provide Full Name</string>
+    <string name="full_address">provide Full Address</string>
 
 </resources>

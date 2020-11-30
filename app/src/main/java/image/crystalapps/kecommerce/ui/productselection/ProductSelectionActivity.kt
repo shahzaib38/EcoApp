@@ -3,22 +3,18 @@ package image.crystalapps.kecommerce.ui.productselection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.core.view.ViewCompat
 import android.transition.Transition
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
-import image.crystalapps.kecommerce.databinding.FragmentEmailUsBinding
 import image.crystalapps.kecommerce.databinding.ProductDataBinding
 import image.crystalapps.kecommerce.listeners.FragmentVisibilityListener
 import image.crystalapps.kecommerce.model.Cart
@@ -60,7 +56,7 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
         product = intent.getParcelableExtra<Products>("parcel")
 
 
-      //  ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
+//        ViewCompat.setTransitionName(imagedesign, IMAGE_HEADER);
         loadItem()
         setUpRelatedFragmentListener()
         setUpPagerFragment(product)

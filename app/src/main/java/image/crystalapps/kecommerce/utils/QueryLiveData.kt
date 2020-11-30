@@ -28,7 +28,9 @@ class QueryLiveData<M : Model>(val query: Query, val type : Class<M>) :LiveData<
         if (querySnapShot!=null){
             println("Wokring Firebase ")
 
-            value =Result.Success(createList(querySnapShot.documents)) }
+            value =Result.Success(createList(querySnapShot.documents))
+
+        }
     }
 
     private fun createList(documents: List<DocumentSnapshot>): MutableList<M> {

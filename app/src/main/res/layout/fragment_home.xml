@@ -12,87 +12,106 @@
 
     </data>
 
-
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
-        android:background="#000"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+       android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#930202" />
 
 
-
-
-
-        <androidx.core.widget.NestedScrollView
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:background="#000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorBackgroundDarkTranslucent"
-                >
+                android:fillViewport="true">
 
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/categoriesRecyclerView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="@color/colorBackgroundLight"
-                    app:layout_constraintBottom_toTopOf="@+id/recentContainer"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-
-                    android:layout_marginTop="12dp"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBackgroundDarkTranslucent">
 
 
-                <FrameLayout
-                    android:id="@+id/recentContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorBackgroundLight"
-                    app:layout_constraintBottom_toTopOf="@+id/popularContainer"
-                    android:layout_marginTop="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categoriesRecyclerView" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/categoriesRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/colorBackgroundLight"
+                        app:layout_constraintBottom_toTopOf="@+id/recentContainer"
+                        app:layout_constraintEnd_toEndOf="parent"
 
-                <FrameLayout
-                    android:id="@+id/popularContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorBackgroundLight"
-                    app:layout_constraintBottom_toTopOf="@+id/blogContainer"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
 
-                    android:layout_marginTop="12dp"
 
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recentContainer" />
+                    <FrameLayout
+                        android:id="@+id/recentContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/colorBackgroundLight"
+                        app:layout_constraintBottom_toTopOf="@+id/popularContainer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/categoriesRecyclerView" />
 
-                <FrameLayout
-                    android:id="@+id/blogContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorBackgroundLight"
-                    android:layout_marginTop="12dp"
+                    <FrameLayout
+                        android:id="@+id/popularContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/colorBackgroundLight"
 
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/popularContainer" />
+                        app:layout_constraintBottom_toTopOf="@+id/blogContainer"
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recentContainer" />
 
-        </androidx.core.widget.NestedScrollView>
+                    <FrameLayout
+                        android:id="@+id/blogContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/colorBackgroundLight"
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/popularContainer" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
 </layout>

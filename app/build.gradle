@@ -30,9 +30,9 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        // testInstrumentationRunner "image.crystalapps.kecommerce.CustomTestRunner"
+         testInstrumentationRunner "image.crystalapps.kecommerce.CustomTestRunner"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -76,6 +76,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
 
+    // Test Implementation
+
+
     testImplementation 'androidx.test.ext:junit:1.1.1'
     testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     testImplementation 'androidx.navigation:navigation-testing:2.3.0'
@@ -90,8 +93,40 @@ dependencies {
     //Mock extension
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 
-    testImplementation 'org.robolectric:robolectric:3.5.1'
+
+
+    testImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+    kaptAndroidTest 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+    testImplementation 'org.robolectric:robolectric:4.4'
     testImplementation 'org.robolectric:multidex:3.4.2'
+
+    testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    testImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    testImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    testImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+    testImplementation "org.robolectric:annotations:$robolectricVersion"
+    //
+
+
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.3.0'
+
+    // Required -- JUnit 4 framework
+    androidTestImplementation 'junit:junit:4.12'
+    // Optional -- Robolectric environment
+    androidTestImplementation 'androidx.test:core:1.0.0'
+    // Optional -- Mockito framework
+    androidTestImplementation 'org.mockito:mockito-core:2.23.0'
+
+    //Mock extension
+    androidTestImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+
+   // androidTestImplementation 'org.robolectric:robolectric:3.5.1'
+  //  androidTestImplementation 'org.robolectric:multidex:3.4.2'
     //
 
 
@@ -101,7 +136,7 @@ dependencies {
 
 
     // Hilt testing
-    testImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
     kaptAndroidTest 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
@@ -170,11 +205,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:21.6.0'
 
     //EsprassoTesting
-    testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    testImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
-    testImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
-    testImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
-    testImplementation "org.robolectric:annotations:$robolectricVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+    androidTestImplementation "org.robolectric:annotations:$robolectricVersion"
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     //Hilt
@@ -186,7 +221,7 @@ dependencies {
 
 
     //Frsco
-    implementation 'com.facebook.fresco:fresco:1.7.1'
+    implementation 'com.facebook.fresco:fresco:2.3.0'
 
 
     //Circle Indicator
@@ -203,9 +238,20 @@ dependencies {
 
      //Worker Manager
     def work_version = "2.4.0"
-    
+
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    implementation "com.google.firebase:firebase-functions:19.0.2"
+
+
+    //Room
+    def room_version = "2.2.5"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 
 }

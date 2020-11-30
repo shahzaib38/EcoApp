@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
 import androidx.activity.viewModels
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
+import image.crystalapps.kecommerce.customview.setUpSnackBar
 import image.crystalapps.kecommerce.databinding.AddressDataBinding
 import image.crystalapps.kecommerce.ui.base.BaseActivity
 
@@ -30,7 +32,20 @@ class AddressActivity :BaseActivity<AddressViewModel , AddressDataBinding>() {
         super.onCreate(savedInstanceState)
       mAddressDataBinding =  getViewDataBinding()
 
+        setUpSnackBar()
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+
+    }
+
+    private fun setUpSnackBar(){
+
+        mAddressDataBinding?.root?.let {
+
+            it.setUpSnackBar(this ,mViewModel.snackBarLiveData ,Snackbar.LENGTH_LONG)
+
+        }
+
 
 
     }

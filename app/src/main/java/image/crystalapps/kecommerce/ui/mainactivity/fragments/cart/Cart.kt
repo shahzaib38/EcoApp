@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
@@ -20,12 +19,11 @@ import image.crystalapps.kecommerce.model.*
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import image.crystalapps.kecommerce.ui.checkout.CheckOut
-import kotlinx.android.synthetic.main.fragment_cart.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator {
+class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() ,
+    CartNavigator {
 
 
 
@@ -71,7 +69,11 @@ class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() , CartNavigator 
     //Cart callBacks
    private val allCartObserver = Observer<List<Cart>> {list->
         if(list!=null ) {
-            val clothesAdapter = CartAdapter(mViewModel,mClothItemCallBack)
+            val clothesAdapter =
+                CartAdapter(
+                    mViewModel,
+                    mClothItemCallBack
+                )
             clothesAdapter.submitList(list)
             mViewModel.setTotalPrice(list.multiple().toString())
             mViewModel.setItems(list.size)

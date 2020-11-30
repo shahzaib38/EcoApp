@@ -18,6 +18,8 @@ import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManagerImpl
 import image.crystalapps.kecommerce.data.database.firebase.InstanceIdManager
 import image.crystalapps.kecommerce.data.database.prefs.SaveTokenSharedPreferenceHelper
+import image.crystalapps.kecommerce.data.network.firebase.ServerFunctions
+import image.crystalapps.kecommerce.data.network.firebase.ServerFunctionsImpl
 import image.crystalapps.kecommerce.utils.FirebaseAuthentication
 import image.crystalapps.kecommerce.utils.PreferenceUtils
 import image.crystalapps.kecommerce.utils.rx.RxSchedularProvider
@@ -33,6 +35,11 @@ class AppModule {
   @Provides
   fun provideLocalDataBaseManager(saveTokenSharedPreferenceHelper: SaveTokenSharedPreferenceHelper) :LocalDataBaseManager{
     return LocalDataBaseImpl(saveTokenSharedPreferenceHelper) }
+
+
+  @Provides
+  @Singleton
+  fun provideServerFunctions() :ServerFunctions =ServerFunctionsImpl()
 
 
 

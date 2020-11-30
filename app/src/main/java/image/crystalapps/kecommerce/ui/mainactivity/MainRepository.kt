@@ -1,10 +1,12 @@
 package image.crystalapps.kecommerce.ui.mainactivity
 
+import androidx.room.Dao
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
+import image.crystalapps.kecommerce.data.database.local.NotificationDao
 import image.crystalapps.kecommerce.model.Cart
 import image.crystalapps.kecommerce.model.NotificationBean
 import image.crystalapps.kecommerce.model.Products
@@ -17,7 +19,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MainRepository @Inject constructor(val firebaseManager: FirebaseManager) :BaseRepository() {
+class MainRepository @Inject constructor(val firebaseManager: FirebaseManager ,dao : NotificationDao) :BaseRepository() {
 
     //Single Document Retreive
      fun getUserProfile(userId :String) : ProductLiveData<UserProfile> {

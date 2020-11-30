@@ -36,6 +36,7 @@
                     android:id="@+id/multiImageContainer"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
+                    android:background="#000"
                     />
 
                 <TextView

@@ -3,16 +3,18 @@ package image.crystalapps.kecommerce.model
 import android.os.Parcel
 import android.os.Parcelable
 
-class Address(
-    var address: String? = null,
-    var province: String? = null, var city: String? = null, var state: String? = null
-    , var mobileNumber: String? = null, var fullName: String? = null
-) : Model(), Parcelable {
+data class Address(
+    val address: String?,
+    val province: String?, val city: String?, val area: String? = ""
+    , val mobileNumber: String?, val fullName: String?
+):Model(),  Parcelable {
+
+    constructor():this("","","","","","")
     constructor(source: Parcel) : this(
         source.readString(),
         source.readString(),
         source.readString(),
-        source.readString(),
+        source.readString()!!,
         source.readString(),
         source.readString()
     )
@@ -23,7 +25,7 @@ class Address(
         writeString(address)
         writeString(province)
         writeString(city)
-        writeString(state)
+        writeString(area)
         writeString(mobileNumber)
         writeString(fullName)
     }
@@ -35,10 +37,5 @@ class Address(
             override fun newArray(size: Int): Array<Address?> = arrayOfNulls(size)
         }
     }
-
-
-
-
-
 
 }

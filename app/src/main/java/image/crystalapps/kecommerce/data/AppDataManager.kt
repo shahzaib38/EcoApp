@@ -8,6 +8,7 @@ import image.crystalapps.kecommerce.data.database.LocalDataBaseManager
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
 import image.crystalapps.kecommerce.data.database.prefs.SharedPreferenceEntry
 import image.crystalapps.kecommerce.model.*
+import image.crystalapps.kecommerce.utils.AddressLiveData
 import image.crystalapps.kecommerce.utils.FirebaseCart
 import image.crystalapps.kecommerce.utils.ProductLiveData
 import image.crystalapps.kecommerce.utils.QueryLiveData
@@ -141,4 +142,10 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
         documentRef.addSnapshotListener(productLiveData)
         return productLiveData }
 
+ override fun getAddress():AddressLiveData<Address>{
+        val documentRef=   Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+            .collection("address").document("usersAddress")
+        val userProfile=      AddressLiveData(documentRef ,Address::class.java)
+        documentRef.addSnapshotListener(userProfile)
+        return userProfile }
 }

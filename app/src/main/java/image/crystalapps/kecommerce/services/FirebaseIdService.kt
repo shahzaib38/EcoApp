@@ -37,10 +37,15 @@ class FirebaseIdService : FirebaseMessagingService() {
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
         sendRegistrationTokenToServer(newToken)
-        saveRegistrationTokenToLocalDataBase(newToken) }
+        saveRegistrationTokenToLocalDataBase(newToken)
+    }
 
-    private  fun sendRegistrationTokenToServer(newToken :String){
-        dataManager.registerInstanceIdManager(newToken) }
+    private  fun sendRegistrationTokenToServer(newToken :String?){
+        if(newToken!=null) {
+            val app = application as ClientApplication
+            app.app.registerInstanceId(newToken)
+        }
+    }
 
 
     private   fun saveRegistrationTokenToLocalDataBase(newToken: String){
@@ -56,12 +61,21 @@ class FirebaseIdService : FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
-                
-            Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
-                .collection("notifications")
-                .add(NotificationBean(it.title,it.body,"https://firebasestorage.googleapis.com/v0/b/delicious-food-21577.appspot.com/o/jackets.jpg?alt=media&token=0fcbe68f-9444-4315-ae8a-b36397409604"))
-    
-    
+//
+//            Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+//                .collection("notifications")
+//                .add(NotificationBean(it.title,it.body,"https://firebasestorage.googleapis.com/v0/b/delicious-food-21577.appspot.com/o/jackets.jpg?alt=media&token=0fcbe68f-9444-4315-ae8a-b36397409604"))
+//
+//
+
+            val app = application as ClientApplication
+
+
+            if(it.title !=null && it.body!=null) {
+                app.dataBase.taskDao()
+                    .insert(NotificationBean(title = it.title!!, description = it.body!!))
+            }
+
 
         }
 
