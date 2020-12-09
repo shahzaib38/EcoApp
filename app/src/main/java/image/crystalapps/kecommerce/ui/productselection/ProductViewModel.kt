@@ -21,7 +21,8 @@ class ProductViewModel @ViewModelInject constructor(private val dataManager: Pro
 
 
 
-
+        fun favourite(){
+            getNavigator().favourite() }
 
 
 

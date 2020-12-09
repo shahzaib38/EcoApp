@@ -63,23 +63,23 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
 
 
     private fun setUpRecyclerView(){
-  //      mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
+        mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
 
-        val list1 =ArrayList<Products>()
-        list1.add(getProducts())
-        list1.add(getProducts())
-        list1.add(getProducts())
-        list1.add(getProducts())
+//        val list1 =ArrayList<Products>()
+//        list1.add(getProducts())
+//        list1.add(getProducts())
+//        list1.add(getProducts())
+//        list1.add(getProducts())
 //      val clothes=  Clothes("Women" ,list1)
 //        val list =ArrayList<Clothes>()
 //        list.add(clothes)
 
-            visibilityListener?.changeVisibility(list1.isNotEmpty())
+            visibilityListener?.changeVisibility(list.isNotEmpty())
 
-             if (list1.isNotEmpty()) {
+             if (list.isNotEmpty()) {
 
                  val blogAdapter = BlogAdapter(mClothItemCallBack)
-                 blogAdapter.submitList(list1)
+                 blogAdapter.submitList(list)
                  mMainProductDataBinding?.recyclerView?.run {
 
                      val layoutManager = LinearLayoutManager(requireContext())
@@ -93,7 +93,7 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
                  } }
 
 
-     //   })
+        })
 
             //}else{
 

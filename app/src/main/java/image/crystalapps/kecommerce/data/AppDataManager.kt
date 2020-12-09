@@ -39,7 +39,7 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
 //        collection.whereEqualTo("categoryName","men")
 //          collection.whereEqualTo("categoryName" ,"women")
 
-    val documentRef=    collection.limit(10)
+    val documentRef=    collection.limit(20)
         val productLiveData = QueryLiveData(documentRef ,
             Products::class.java)
         documentRef.addSnapshotListener(productLiveData)
@@ -53,6 +53,7 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
             Products::class.java)
         return productLiveData
     }
+
 
     //Single Document Retreive
    override fun getUserProfile(userId :String) :ProductLiveData<UserProfile>{
@@ -70,6 +71,11 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
         return productLiveData
     }
 
+    override fun getPaginationDocuments(query :Query) : QueryLiveData<Products> {
+        val productLiveData = QueryLiveData(query,Products::class.java)
+        query.addSnapshotListener(productLiveData)
+        return productLiveData
+    }
 
     private fun toQuery(filters: Filter): Query{ // Construct query basic query
         var query: Query=Firebase.firestore.collection("Fashion List").document("Men")

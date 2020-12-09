@@ -16,7 +16,7 @@ class CategoriesListAdapter(val itemClickListener: OnItemClickListener<Categorie
         binding.apply {
         categories= item }
 
-        binding.categoriesImageView.setOnClickListener {
+        binding.categoryValue.setOnClickListener {
             itemClickListener.clickItem(binding.root, item)
         }
     }
@@ -29,7 +29,7 @@ class CategoriesListAdapter(val itemClickListener: OnItemClickListener<Categorie
         parent: ViewGroup,
         viewType: Int
     ): CategoriesListDataBinding {
-       return DataBindingUtil.inflate(inflater, R.layout.categories_list_view, parent, false)
+       return DataBindingUtil.inflate(inflater, R.layout.categories_item_layout, parent, false)
     }
 
 }

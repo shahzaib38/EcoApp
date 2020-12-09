@@ -102,11 +102,6 @@ class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() ,
         startActivity(intent)
     }
 
-
-
-
-
-
     private fun getProducts() : Products {
         val uri1: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
         val varietiesArray=ArrayList<Sizes>()
@@ -151,6 +146,11 @@ class Cart : BaseFragment<CartViewModel, CartFragmentBinding>() ,
             12200,
             productDetails)
         return products }
+
+
+
+
+
 
 
 }

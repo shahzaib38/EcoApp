@@ -140,15 +140,6 @@ dependencies {
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
     kaptAndroidTest 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
-//    implementation 'com.google.dagger:dagger-android:2.22'
-//    implementation 'com.google.dagger:dagger-android-support:2.22'
-//    // if you use the support libraries
-//    kapt 'com.google.dagger:dagger-android-processor:2.22'
-//
-//    implementation 'com.google.dagger:dagger:2.26'
-//    kapt 'com.google.dagger:dagger-compiler:2.26'
-
-
     def lifecycle_version = "2.2.0"
 
     // ViewModel
@@ -251,7 +242,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$room_version"
+  //  implementation 'androidx.paging:paging-runtime:3.0.0-alpha10'
+//    implementation ('androidx.paging:paging-runtime:3.0.0-alpha10'){
+//        exclude group: 'kotlinx.coroutines.AbstractCoroutine', module:'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.1'
+//
+//
+//    }
+    implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
 
 }

@@ -17,26 +17,65 @@ class NotificationViewModel  @ViewModelInject constructor(private val mainReposi
     val mUpdateEvent = MutableLiveData<Boolean>(false)
 
 
+//
+//    val notificationLiveData =mUpdateEvent.switchMap {
+//        mainRepository.getNotification().distinctUntilChanged().switchMap {data->
+//            filterData(data) } }
+//
+//
+//
+//    private fun filterData(data : Result<List<NotificationBean>>) : LiveData<List<NotificationBean>> {
+//        val result = MutableLiveData<List<NotificationBean>>()
+//
+//        if (data is Result.Success){
+//            viewModelScope.launch {
+//                result.value = data.data }}
+//
+//        if(data is Result.Error){
+//            result.value = emptyList() }
+//
+//        return result
+//    }
 
-    val notificationLiveData =mUpdateEvent.switchMap {
-        mainRepository.getNotification().distinctUntilChanged().switchMap {data->
-            filterData(data) } }
 
 
+    val allNotificationLiveData =mUpdateEvent.switchMap {
+        mainRepository.observeNotifications().distinctUntilChanged().switchMap {
+            filterNotificationData(it)
+        }
 
-    private fun filterData(data : Result<List<NotificationBean>>) : LiveData<List<NotificationBean>> {
-        val result = MutableLiveData<List<NotificationBean>>()
-
-        if (data is Result.Success){
-            viewModelScope.launch {
-                result.value = data.data }}
-
-        if(data is Result.Error){
-            result.value = emptyList() }
-
-        return result
     }
 
+
+
+
+    private fun filterNotificationData(data : Result<List<NotificationBean>>) : LiveData<List<NotificationBean>> {
+        val result =MutableLiveData< List<NotificationBean>>()
+
+        //    if (data==null){
+        //        println("data is null")
+
+        //     }
+
+
+        //   result.postValue(data.data)
+        //    data?.run {
+
+
+        if (data is Result.Success) {
+            println("Success")
+            //   viewModelScope.launch {
+            result.value = data.data
+        }
+        //        }
+//
+//           if (data is Result.Error) {
+//               println("Error is cominng")
+//           }
+
+        //     }
+        return result
+    }
 
 
 

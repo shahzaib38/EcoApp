@@ -29,7 +29,14 @@
             android:id="@+id/categories"
             android:label="@string/categories"
             android:name="image.crystalapps.kecommerce.ui.mainactivity.fragments.categories.Categories"
-            />
+            >
+
+            <action android:id="@+id/From_Categories_To_ClothActivity"
+                app:destination="@id/clothesactivity"
+
+                />
+
+        </fragment>
 
     <fragment
         android:id="@+id/order"

@@ -146,6 +146,10 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
         }
     }
 
+    override fun favourite() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private fun getProducts() : Products {
         val uri1: Uri = Uri.parse("android.resource://image.crystalapps.kecommerce/drawable/jeans")
 

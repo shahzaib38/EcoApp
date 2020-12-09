@@ -34,7 +34,7 @@ class NotificationFragment : BaseFragment<NotificationViewModel , NotificationDa
 
 
 
-        mViewModel.notificationLiveData.observe(viewLifecycleOwner , Observer {list->
+        mViewModel.allNotificationLiveData.observe(viewLifecycleOwner , Observer {list->
 
             val notificationAdapter = NotificationAdapter(mNotificationCallBack)
             notificationAdapter.submitList(list)

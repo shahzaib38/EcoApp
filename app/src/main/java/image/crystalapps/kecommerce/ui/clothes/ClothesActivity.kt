@@ -61,8 +61,10 @@ class ClothesActivity : BaseActivity<ClothesViewModel, ClothesDataBinding>(),
                 setSupportActionBar(this)
             }
 
+
             mViewModel.filter.value = Filter.default
         }
+
 //        mViewModel.allProductsLiveData.observe(this, clothesPurchase)
 
         // Products CallBack

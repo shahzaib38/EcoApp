@@ -16,7 +16,11 @@ data class NotificationBean(
     @ColumnInfo(name = "title")
     var title: String = "",
     @ColumnInfo(name="description")
-    var description: String = ""
+    var description: String = "",
+    @ColumnInfo(name="imageUrl")
+    var imageUrl :String ="",
+    @ColumnInfo(name = "date")
+    var date: Long?
 ) : Model(){
 
 }

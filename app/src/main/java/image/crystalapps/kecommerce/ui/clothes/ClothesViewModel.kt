@@ -18,7 +18,7 @@ class ClothesViewModel  @ViewModelInject constructor(private val clothesReposito
     fun showSortDialog(){ getNavigator().showSortDialog() }
 
 //    val allProductsLiveData =filter.switchMap {filter->
-//            dataManager.getClothesData(filter).distinctUntilChanged().switchMap { data ->
+//        clothesRepository.getClothesData(filter).distinctUntilChanged().switchMap { data ->
 //                filterData(data)} }
 
     private fun filterData(data : Result<List<Products>>) :LiveData<List<Products>> {

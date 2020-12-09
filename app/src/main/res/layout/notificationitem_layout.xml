@@ -23,8 +23,11 @@
         <include
             android:id="@+id/notificationId"
             layout="@layout/notification_cardview"
-            bind:notificationCardViewModel="@{notificationItem}"
-            />
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintTop_toTopOf="parent"
+            bind:notificationCardViewModel="@{notificationItem}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

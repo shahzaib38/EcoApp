@@ -71,7 +71,7 @@ class Home : BaseFragment<HomeViewModel, HomeFragmentBinding>() ,OnItemClickList
         mViewModel.setUpCategories()
         initFragments()
         setHasOptionsMenu(true)
-        setUpRecyclerView()
+      //  setUpRecyclerView()
 
 
 //        val date =Date(2019,1,2)

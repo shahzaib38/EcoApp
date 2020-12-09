@@ -9,6 +9,7 @@ import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.extensions.sum
+import image.crystalapps.kecommerce.utils.Converters
 
 
 @BindingAdapter("customImageUrl")
@@ -81,4 +82,22 @@ fun subTotal(totalTextView :TextView ,itemTotal :Int){
     }
 
 
+
+
+
+
+}
+@BindingAdapter("dates")
+fun setDateFor(totalItemTextView: TextView, totalitems :Long){
+
+    if(totalitems !=null){
+        val fromTimeStamp = Converters.fromTimeStamp(totalitems)
+        if(fromTimeStamp!=null){
+            totalItemTextView.text = fromTimeStamp.date.toString()
+
+        }
+
+
+
+    }
 }

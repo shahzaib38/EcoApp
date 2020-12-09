@@ -71,6 +71,16 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
+
+                <ImageView
+                    android:id="@+id/wishId"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/favourite_black"
+                   android:layout_margin="20dp"
+
+                    />
+
                 <View
                     android:id="@+id/relatedBottomDivider"
                     android:layout_width="match_parent"

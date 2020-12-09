@@ -1,25 +1,26 @@
 package image.crystalapps.kecommerce.ui.mainactivity
 
-import androidx.room.Dao
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
-import image.crystalapps.kecommerce.data.database.local.NotificationDao
-import image.crystalapps.kecommerce.model.Cart
-import image.crystalapps.kecommerce.model.NotificationBean
-import image.crystalapps.kecommerce.model.Products
-import image.crystalapps.kecommerce.model.UserProfile
+import image.crystalapps.kecommerce.data.database.local.notification.NotificationDao
+//import image.crystalapps.kecommerce.data.database.local.wishlist.WishListDao
+import image.crystalapps.kecommerce.model.*
 import image.crystalapps.kecommerce.ui.base.BaseRepository
 import image.crystalapps.kecommerce.utils.FirebaseCart
 import image.crystalapps.kecommerce.utils.ProductLiveData
 import image.crystalapps.kecommerce.utils.QueryLiveData
+import image.crystalapps.kecommerce.utils.Result
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MainRepository @Inject constructor(val firebaseManager: FirebaseManager ,dao : NotificationDao) :BaseRepository() {
+class MainRepository @Inject constructor(val firebaseManager: FirebaseManager ,val dao : NotificationDao  , val dataManager: DataManager) :BaseRepository() {
 
     //Single Document Retreive
      fun getUserProfile(userId :String) : ProductLiveData<UserProfile> {
@@ -28,27 +29,18 @@ class MainRepository @Inject constructor(val firebaseManager: FirebaseManager ,d
         documentReference.addSnapshotListener(userProfile)
         return userProfile }
 
-
      fun getAllProducts(): QueryLiveData<Products> {
-
-
         val collection =    Firebase.firestore.collectionGroup("Products")
-//
-//        collection.whereEqualTo("categoryName","men")
-//          collection.whereEqualTo("categoryName" ,"women")
-
-        val documentRef=    collection.limit(10)
+        val documentRef=    collection.limit(40)
         val productLiveData = QueryLiveData(documentRef ,
             Products::class.java)
         documentRef.addSnapshotListener(productLiveData)
         return productLiveData }
 
-
      fun registerInstanceIdManager(newToken: String?) {
         val firebaseAuth=  Firebase.auth
         firebaseManager.registerInstanceIdManager(firebaseAuth,newToken)
     }
-
 
       fun getCartItem():QueryLiveData<Cart>{
         val documentRef=   Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
@@ -85,4 +77,25 @@ class MainRepository @Inject constructor(val firebaseManager: FirebaseManager ,d
         query.addSnapshotListener(productLiveData)
         return productLiveData
     }
+
+
+    fun observeNotifications() : LiveData<Result<List<NotificationBean>>>{
+       return  dao.getAllNotificatios().map {
+            Result.Success(it) } }
+
+    fun insert(notificationBean: NotificationBean){
+        dao.insert(notificationBean) }
+
+
+//
+//    fun insertWish(wishModel: WishModel){
+//        wishDao.insert(wishModel)
+//    }
+//
+//    fun getWishList(): LiveData<Result<List<WishModel>>>{
+//
+//        return wishDao.getAllWishList().map { Result.Success(it) }
+//
+//    }
+
 }

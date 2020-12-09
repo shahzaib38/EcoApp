@@ -4,22 +4,20 @@ import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.R
-import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.data.Event
+import image.crystalapps.kecommerce.model.NotificationBean
 import image.crystalapps.kecommerce.model.UserProfile
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.utils.Result
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(val mainRepository : MainRepository ):
     BaseViewModel<MainNavigator>(mainRepository) {
 
 
-    //   val product =Transformations.switchMap(  allProductsLiveData,dataManager.getAllProducts().value)
 
     val mUserProfileUpdate = MutableLiveData<UserProfile>()
     val mUpdateEvent = MutableLiveData<Boolean>(false)
@@ -136,6 +134,33 @@ class MainViewModel @ViewModelInject constructor(val mainRepository : MainReposi
        }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  fun  insert(notification :NotificationBean)
+  {
+      viewModelScope.launch(Dispatchers.IO) {
+          mainRepository.insert(notification)
+      }
+  }
+
 
 
 }

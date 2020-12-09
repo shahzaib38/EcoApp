@@ -1,4 +1,4 @@
-package image.crystalapps.kecommerce.data.database.local
+package image.crystalapps.kecommerce.data.database.local.notification
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
