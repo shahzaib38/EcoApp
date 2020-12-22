@@ -1,9 +1,10 @@
-package image.crystalapps.kecommerce.utils.rx
+package image.crystalapps.kecommerce.utils
 
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class RxSchedularProvider :SchedularProvider {
+class RxSchedularProvider :
+    SchedularProvider {
 
 
     override fun io(): Scheduler {

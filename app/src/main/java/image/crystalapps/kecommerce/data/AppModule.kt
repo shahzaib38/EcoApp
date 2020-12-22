@@ -5,9 +5,6 @@ import android.content.Context
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,16 +17,25 @@ import image.crystalapps.kecommerce.data.database.firebase.InstanceIdManager
 import image.crystalapps.kecommerce.data.database.prefs.SaveTokenSharedPreferenceHelper
 import image.crystalapps.kecommerce.data.network.firebase.ServerFunctions
 import image.crystalapps.kecommerce.data.network.firebase.ServerFunctionsImpl
-import image.crystalapps.kecommerce.utils.FirebaseAuthentication
+import image.crystalapps.kecommerce.data.network.firebase.FirebaseAuthentication
 import image.crystalapps.kecommerce.utils.PreferenceUtils
-import image.crystalapps.kecommerce.utils.rx.RxSchedularProvider
-import image.crystalapps.kecommerce.utils.rx.SchedularProvider
+import image.crystalapps.kecommerce.utils.RxSchedularProvider
+import image.crystalapps.kecommerce.utils.SchedularProvider
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 class AppModule {
+
+
+
+  @Provides
+  fun getCoroutineIO() : CoroutineDispatcher{
+
+    return Dispatchers.IO
+  }
 
 
   @Provides
@@ -62,8 +68,9 @@ class AppModule {
 
 
   @Provides
-  fun provideSchedularProvider(): SchedularProvider{
-    return RxSchedularProvider() }
+  fun provideSchedularProvider(): SchedularProvider {
+    return RxSchedularProvider()
+  }
 
 
   @Provides
@@ -80,10 +87,10 @@ class AppModule {
 
 
     return GoogleSignIn.getClient(application, gso) }
-
-
-  @Provides
-  fun gerFirebaseAuth():FirebaseAuth{ return Firebase.auth }
+//
+//
+//  @Provides
+//  fun gerFirebaseAuth():FirebaseAuth{ return Firebase.auth }
 
 
 

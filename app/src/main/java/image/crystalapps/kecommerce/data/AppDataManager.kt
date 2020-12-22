@@ -1,5 +1,7 @@
 package image.crystalapps.kecommerce.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -8,10 +10,8 @@ import image.crystalapps.kecommerce.data.database.LocalDataBaseManager
 import image.crystalapps.kecommerce.data.database.firebase.FirebaseManager
 import image.crystalapps.kecommerce.data.database.prefs.SharedPreferenceEntry
 import image.crystalapps.kecommerce.model.*
-import image.crystalapps.kecommerce.utils.AddressLiveData
-import image.crystalapps.kecommerce.utils.FirebaseCart
-import image.crystalapps.kecommerce.utils.ProductLiveData
-import image.crystalapps.kecommerce.utils.QueryLiveData
+import image.crystalapps.kecommerce.data.network.firebase.FirebaseCart
+import image.crystalapps.kecommerce.utils.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -21,6 +21,14 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
                                          private val firebaseManager: FirebaseManager,
                                          private  val ioDispatcher: CoroutineDispatcher=Dispatchers.IO) : DataManager {
 
+
+    private fun filterUserProfileData(data: Result<MutableList<Products>>): LiveData<MutableList<Products>> {
+        val result = MutableLiveData<MutableList<Products>>()
+        if (data is Result.Success){
+            result.value = data.data }
+
+
+        return result }
 
 
  override   fun saveTokenInformation(sharedPreferenceEntry: SharedPreferenceEntry) {
@@ -73,6 +81,7 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
 
     override fun getPaginationDocuments(query :Query) : QueryLiveData<Products> {
         val productLiveData = QueryLiveData(query,Products::class.java)
+
         query.addSnapshotListener(productLiveData)
         return productLiveData
     }
@@ -149,9 +158,19 @@ class AppDataManager @Inject constructor(private  val dataBaseManager: LocalData
         return productLiveData }
 
  override fun getAddress():AddressLiveData<Address>{
-        val documentRef=   Firebase.firestore.collection("users").document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
+        val documentRef=   Firebase.firestore.collection(FirebaseUtils.USER_COLLECTION_PATH).document("7m5pHZ89AecrwnlLKjuoLlZfpMh1")
             .collection("address").document("usersAddress")
         val userProfile=      AddressLiveData(documentRef ,Address::class.java)
         documentRef.addSnapshotListener(userProfile)
         return userProfile }
+
+
+    override  fun getAccountDetails(userId :String): AddressLiveData<Account> {
+        val documentRef=   Firebase.firestore.collection(FirebaseUtils.USER_COLLECTION_PATH).document(userId)
+            .collection(FirebaseUtils.Account_COLLECTION_PATH).document(FirebaseUtils.ACCOUNT_DOCUMENT_PATH)
+        val accountLiveData=      AddressLiveData(documentRef ,Account::class.java)
+        documentRef.addSnapshotListener(accountLiveData)
+        return accountLiveData   }
+
+
 }

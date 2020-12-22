@@ -92,7 +92,7 @@ class RelatedFragment :BaseFragment<RelatedViewModel , RelatedDataBinding>() ,Re
 
 
 
-        fragmentVisibilityListener?.changeVisibility(list.isNotEmpty())
+        fragmentVisibilityListener?.changeVisibility(false)
             val relatedAdapter =RelatedAdapter(mClothItemCallBack)
             relatedAdapter.submitList(list)
             mRelatedDataBinding?.relatedRecyclerView?.run {

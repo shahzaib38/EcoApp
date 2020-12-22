@@ -1,16 +1,25 @@
 package image.crystalapps.kecommerce.ui.mainactivity.fragments.products
 
+import android.content.ClipData.Item
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
+import androidx.paging.PagedList
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.paging.FirestorePagingOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import image.crystala.MainActivity
 import image.crystalapps.kecommerce.BR
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.MainProductDataBinding
@@ -19,10 +28,14 @@ import image.crystalapps.kecommerce.model.Clothes
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
+import image.crystalapps.kecommerce.pagination.FireStorePagingSource
 import image.crystalapps.kecommerce.ui.base.BaseFragment
-import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.HomeAdapter
-import io.reactivex.Observer
-import kotlinx.android.synthetic.main.mainproduct_layout.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 @AndroidEntryPoint
 class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
@@ -31,12 +44,19 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
     private var mMainProductDataBinding :MainProductDataBinding ?=null
 
     var visibilityListener :FragmentVisibilityListener?=null
-
+//
+//    fun getFireStoreResult() =
+//        Pager(config = PagingConfig(pageSize = 1
+//            , maxSize = 10,enablePlaceholders = false)
+//            , pagingSourceFactory = { FireStorePagingSource() }
+//
+//        ).liveData
+//
 
 
     override fun getBindingVariable(): Int = BR.viewModel
 
-    override fun getLayoutId(): Int =R.layout.mainproduct_layout
+    override fun getLayoutId(): Int = R.layout.mainproduct_layout
 
 
     override fun getViewModel(): BlogViewModel  =mViewModel
@@ -47,9 +67,16 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
 
           mMainProductDataBinding   = getViewDataBinding()
 
-        setUpRecyclerView()
+//        mViewModel.getFireStoreResult()
+        lifecycleScope.launch {
 
+            mViewModel.getFireStoreResult()
 
+        }
+
+            setUpRecyclerView()
+
+      //  }
     }
 
 
@@ -57,50 +84,87 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
     //Diff Call Back
     private val mClothItemCallBack = object : DiffUtil.ItemCallback<Products>(){
         override fun areItemsTheSame(oldItem: Products, newItem: Products):
-                Boolean =false
+                Boolean =oldItem.inStock==newItem.inStock
         override fun areContentsTheSame(oldItem: Products, newItem: Products):
                 Boolean = oldItem==newItem}
 
 
-    private fun setUpRecyclerView(){
-        mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
+    private  fun setUpRecyclerView(){
+     //   mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
 
-//        val list1 =ArrayList<Products>()
-//        list1.add(getProducts())
-//        list1.add(getProducts())
-//        list1.add(getProducts())
-//        list1.add(getProducts())
+
+      val baseQuery=  Firebase.firestore.collection("Fashion List").document("Men")
+            .collection("Products")
+        val list1 =ArrayList<Products>()
+        list1.add(getProducts())
+        list1.add(getProducts())
+        list1.add(getProducts())
+        list1.add(getProducts())
+        list1.add(getProducts())
+        list1.add(getProducts())
 //      val clothes=  Clothes("Women" ,list1)
 //        val list =ArrayList<Clothes>()
 //        list.add(clothes)
+//
+//        val config = PagedList.Config.Builder()
+//            .setEnablePlaceholders(false)
+//            .setPrefetchDistance(10)
+//            .setPageSize(20)
+//            .build()
+//
+//        val options =
+//            FirestorePagingOptions.Builder<Products>()
+//                .setLifecycleOwner(this)
+//                .setQuery(baseQuery, config, Products::class.java)
+//                .build()
 
-            visibilityListener?.changeVisibility(list.isNotEmpty())
+//
+//
 
-             if (list.isNotEmpty()) {
-
-                 val blogAdapter = BlogAdapter(mClothItemCallBack)
-                 blogAdapter.submitList(list)
-                 mMainProductDataBinding?.recyclerView?.run {
-
-                     val layoutManager = LinearLayoutManager(requireContext())
-                     this.layoutManager = layoutManager
-                     this.adapter = blogAdapter
-                     this.isNestedScrollingEnabled = false
-                     val divider = DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL)
-                     divider.setDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.divider_line)!!)
-                     this.addItemDecoration(divider)
-
-                 } }
+        val blogAdapter = BlogAdapter()
+//
+        visibilityListener?.changeVisibility(true)
+//             if (list.isNotEmpty()) {
 
 
-        })
 
-            //}else{
+        blogAdapter.submitList(list1)
 
-              //  throw NullPointerException("Runtime Exception ")
 
-            //}
+                requireView().findViewById<RecyclerView>(R.id.recyclerView).run {
+
+                    this.layoutManager = GridLayoutManager(requireContext(), 2)
+                    this.adapter = blogAdapter
+                    this.isNestedScrollingEnabled = false
+                }
+
+
+//
+//
+//
+//
+//            lifecycleScope.launch {
+//
+//                   mViewModel.allProductsLiveData.observe(viewLifecycleOwner , androidx.lifecycle.Observer { list ->
+//
+//                    println("Thread Name Launch ${Thread.currentThread().name}")
+//                    println("Thread Name RecyclerView ${Thread.currentThread().name}")
+//
+//                    blogAdapter.submitList(list)
+//
+//                })
+//
+//            }
+
+
+//        mViewModel.getFireStoreResult().collect {
+//
+//            blogAdapter.submitData(it)
+//        }
+
     }
+
+
 
 
 
@@ -139,7 +203,6 @@ class BlogFragment :BaseFragment<BlogViewModel , MainProductDataBinding>() {
 
 
         val products= Products(
-
             "Jeans",
             "men",
             "Black T Shirt",

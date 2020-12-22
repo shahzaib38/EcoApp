@@ -24,6 +24,7 @@ class NotificationAdapter(val diffUtil: DiffUtil.ItemCallback<NotificationBean>)
     }
 
     override fun onDataChanged(values: Boolean) {
+
     }
 
 

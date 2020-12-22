@@ -7,6 +7,7 @@ import android.transition.Transition
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
@@ -24,11 +25,11 @@ import image.crystalapps.kecommerce.ui.base.BaseActivity
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.dialogfragments.LogInDialogFragment
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.related.RelatedFragment
 import image.crystalapps.kecommerce.ui.productselection.fragments.PagerFragment
-import image.crystalapps.kecommerce.utils.OnItemClickListener
-import kotlinx.android.synthetic.main.activity_product_selection.*
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
 @AndroidEntryPoint
-class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBinding>()  ,OnItemClickListener<Sizes>,SelectionNavigator {
+class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBinding>()  ,
+    OnItemClickListener<Sizes>,SelectionNavigator {
 
 
     companion object {
@@ -60,6 +61,10 @@ class ProductSelectionActivity : BaseActivity<ProductViewModel, ProductDataBindi
         loadItem()
         setUpRelatedFragmentListener()
         setUpPagerFragment(product)
+
+
+
+
     }
 
 

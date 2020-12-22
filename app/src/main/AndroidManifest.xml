@@ -18,7 +18,6 @@
         <activity android:name=".ui.Demo">
 
 
-
         </activity>
 
         <activity android:name=".ui.productselection.ProductSelectionActivity"/>
@@ -39,6 +38,7 @@
 
         <activity android:name="image.crystala.MainActivity"
             android:theme="@style/AppTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -16,11 +16,12 @@ import image.crystalapps.kecommerce.model.Sort
 import image.crystalapps.kecommerce.ui.base.BaseDialogFragment
 import image.crystalapps.kecommerce.ui.clothes.ClothesActivity
 import image.crystalapps.kecommerce.utils.ClothesUtils
-import image.crystalapps.kecommerce.utils.OnItemClickListener
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
 
 @AndroidEntryPoint
-class SortDialogFragment : BaseDialogFragment<SortViewModel, SortDataBinding>() ,SortNavigator , OnItemClickListener<Sort> {
+class SortDialogFragment : BaseDialogFragment<SortViewModel, SortDataBinding>() ,SortNavigator ,
+    OnItemClickListener<Sort> {
 
 
  private var mSortDataBinding :SortDataBinding?=null

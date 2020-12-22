@@ -1,6 +1,9 @@
 package image.crystalapps.kecommerce.ui.productselection
 
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import image.crystalapps.kecommerce.ui.base.BaseRepository
 
 import javax.inject.Inject
@@ -14,6 +17,9 @@ class ProductRepository @Inject constructor(
 ):BaseRepository()
 
 {
+
+
+
 
 //      fun addToCart(product: Cart) {
 //        FirebaseCart.addToCart(product)

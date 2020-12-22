@@ -13,34 +13,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+<!--        <TextView-->
+<!--            android:id="@+id/latest"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="@string/latest"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="20sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:text="See All"-->
+<!--            android:drawableRight="@drawable/right_arrow"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recent_recyclerView"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:minHeight="170dp"-->
+<!--            android:paddingBottom="16dp"-->
+<!--            android:paddingEnd="16dp"-->
+<!--            android:paddingStart="16dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/latest" />-->
+
         <TextView
             android:id="@+id/latest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/latest"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            style="@style/SectionTitle"
+            android:text="Latest"
+            app:layout_constraintBottom_toTopOf="@+id/recent_recyclerView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:text="See All"
-            android:drawableRight="@drawable/right_arrow"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/seeAll"
+            style="@style/SeeAllText"
+            android:text="@string/section_see_all"
+            app:layout_constraintBaseline_toBaselineOf="@+id/titleText"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recent_recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="170dp"
+            android:clipToPadding="false"
+            android:minHeight="@dimen/product_horizontal_item_size"
             android:paddingBottom="16dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
@@ -48,7 +77,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/latest" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

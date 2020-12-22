@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.adapter.BaseAdapter
 import image.crystalapps.kecommerce.databinding.RatingDataBinding
-import image.crystalapps.kecommerce.utils.OnItemClickListener
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
-class FilterAdapter (val itemClickLister: OnItemClickListener<RatingItem> ,diffUtil :DiffUtil.ItemCallback<RatingItem>) :BaseAdapter<RatingItem , RatingDataBinding>(diffUtil) {
+class FilterAdapter (val itemClickLister: OnItemClickListener<RatingItem>, diffUtil :DiffUtil.ItemCallback<RatingItem>) :BaseAdapter<RatingItem , RatingDataBinding>(diffUtil) {
 
     override fun createBinding(
         inflater: LayoutInflater,

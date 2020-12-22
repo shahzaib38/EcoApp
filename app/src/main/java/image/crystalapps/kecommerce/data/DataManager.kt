@@ -24,4 +24,9 @@ interface DataManager{
     fun getNotification():QueryLiveData<NotificationBean>
     fun getAddress(): AddressLiveData<Address>
     fun getPaginationDocuments(query : Query) : QueryLiveData<Products>
+      fun getAccountDetails(userId :String):AddressLiveData<Account>
+
+
+
+
 }

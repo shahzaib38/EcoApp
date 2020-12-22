@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.databinding.CategoriesListDataBinding
 import image.crystalapps.kecommerce.model.Categories
-import image.crystalapps.kecommerce.utils.OnItemClickListener
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
-class CategoriesListAdapter(val itemClickListener: OnItemClickListener<Categories> ,diffUtil: DiffUtil.ItemCallback<Categories>) :image.crystalapps.kecommerce.adapter.BaseAdapter<Categories ,CategoriesListDataBinding>(diffUtil){
+class CategoriesListAdapter(val itemClickListener: OnItemClickListener<Categories>, diffUtil: DiffUtil.ItemCallback<Categories>) :image.crystalapps.kecommerce.adapter.BaseAdapter<Categories ,CategoriesListDataBinding>(diffUtil){
 
 
     override fun bind(binding: CategoriesListDataBinding, item: Categories) {

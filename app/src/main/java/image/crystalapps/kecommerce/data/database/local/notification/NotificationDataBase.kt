@@ -29,7 +29,7 @@ abstract  class NotificationDataBase :RoomDatabase() {
                     ?: buildDatabase(
                         context.applicationContext
                     ).also {
-                    INSTANCE = it
+                    INSTANCE    = it
                 }
             }
 

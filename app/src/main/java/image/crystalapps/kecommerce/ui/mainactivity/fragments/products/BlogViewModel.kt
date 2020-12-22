@@ -2,15 +2,24 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.products
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.*
 import image.crystalapps.kecommerce.data.DataManager
 import image.crystalapps.kecommerce.model.Categories
 import image.crystalapps.kecommerce.model.Clothes
 import image.crystalapps.kecommerce.model.Products
+import image.crystalapps.kecommerce.pagination.FireStorePagingSource
 import image.crystalapps.kecommerce.ui.base.BaseViewModel
 import image.crystalapps.kecommerce.ui.mainactivity.MainRepository
 import image.crystalapps.kecommerce.utils.FirebaseUtils
 import image.crystalapps.kecommerce.utils.Result
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+import kotlinx.coroutines.withContext
+import java.util.concurrent.Callable
 
 class BlogViewModel  @ViewModelInject  constructor(val mainRepository: MainRepository) :BaseViewModel<BlogNavigator>(mainRepository ) {
 
@@ -19,10 +28,39 @@ class BlogViewModel  @ViewModelInject  constructor(val mainRepository: MainRepos
 
     val mUpdateEvent = MutableLiveData<Boolean>(false)
 
+    val mUpdateEvent1 = MutableLiveData<Boolean>(false)
+
+    val pagingFlowData =MutableLiveData<PagingData<Products>>()
+
+
     val categoriesLiveData = MutableLiveData<List<Categories>>()
     val arrayList :ArrayList<Products> =ArrayList<Products>()
 
 
+
+
+
+
+
+   suspend fun getFireStoreResult()
+       {
+           mainRepository.getFireStoreResult().onEach {
+
+        //       pagingFlowData.value =it
+
+
+           }.flowOn(Dispatchers.IO
+           )
+               .launchIn(viewModelScope + Dispatchers.IO)
+
+
+
+       }
+
+//
+//        Pager(PagingConfig(20)) {
+//            FireStorePagingSource()
+//        }.flow.cachedIn(viewModelScope)
 
 
     fun setUpCategories(){
@@ -111,6 +149,7 @@ class BlogViewModel  @ViewModelInject  constructor(val mainRepository: MainRepos
         listProducts.add(Clothes(categoriesNaem ,products))
 
         return listProducts }
+
 
 
 

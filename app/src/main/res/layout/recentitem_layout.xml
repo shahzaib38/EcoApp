@@ -14,13 +14,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="170dp"
-        android:layout_height="170dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <include
             android:id="@+id/productItemId"
             layout="@layout/productitem"
             bind:ProductItemViewModel="@{productsItem}"
+
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

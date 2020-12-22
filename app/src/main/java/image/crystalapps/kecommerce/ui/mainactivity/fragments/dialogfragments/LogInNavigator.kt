@@ -9,4 +9,5 @@ interface LogInNavigator {
 
     fun dismissDialog()
    fun  setGoogleAuth(firebaseAuth: FirebaseAuth?)
+   fun  signOut()
 }

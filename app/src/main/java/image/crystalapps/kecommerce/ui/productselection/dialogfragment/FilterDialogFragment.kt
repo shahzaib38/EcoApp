@@ -15,11 +15,12 @@ import image.crystalapps.kecommerce.databinding.FilterDataBinding
 import image.crystalapps.kecommerce.model.Filter
 import image.crystalapps.kecommerce.ui.base.BaseDialogFragment
 import image.crystalapps.kecommerce.ui.clothes.ClothesActivity
-import image.crystalapps.kecommerce.utils.OnItemClickListener
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
 
 @AndroidEntryPoint
-class FilterDialogFragment : BaseDialogFragment<FilterViewModel, FilterDataBinding>() , FilterNavigator ,SeekBar.OnSeekBarChangeListener ,OnItemClickListener<RatingItem> {
+class FilterDialogFragment : BaseDialogFragment<FilterViewModel, FilterDataBinding>() , FilterNavigator ,SeekBar.OnSeekBarChangeListener ,
+    OnItemClickListener<RatingItem> {
 
 
     var step = 1000

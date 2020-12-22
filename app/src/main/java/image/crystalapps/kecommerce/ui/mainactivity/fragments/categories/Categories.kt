@@ -16,7 +16,7 @@ import image.crystalapps.kecommerce.model.Categories
 import image.crystalapps.kecommerce.ui.base.BaseFragment
 import androidx.lifecycle.Observer
 import image.crystalapps.kecommerce.ui.clothes.ClothesActivity
-import image.crystalapps.kecommerce.utils.OnItemClickListener
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
 @AndroidEntryPoint
 class Categories : BaseFragment<CategoriesViewModel, CategoriesFragmentBinding>(),

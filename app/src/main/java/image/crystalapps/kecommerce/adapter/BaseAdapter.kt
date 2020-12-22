@@ -11,7 +11,6 @@ import image.crystalapps.kecommerce.model.Model
 abstract class BaseAdapter< M : Model, VDB: ViewDataBinding>(diffUtil: DiffUtil.ItemCallback<M>) : ListAdapter<M,BaseViewHolder<VDB>>(diffUtil) {
 
 
-  //  open var items: List<M>? = ArrayList()
 
 
 

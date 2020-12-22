@@ -1,4 +1,4 @@
-package image.crystalapps.kecommerce.utils
+package image.crystalapps.kecommerce.data.network.firebase
 
 object FirebaseAuthentication {
 

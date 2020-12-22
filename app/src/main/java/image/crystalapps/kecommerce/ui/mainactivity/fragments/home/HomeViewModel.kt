@@ -3,6 +3,7 @@ package image.crystalapps.kecommerce.ui.mainactivity.fragments.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagingData
 import com.google.firebase.ktx.Firebase
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.data.DataManager
@@ -29,7 +30,9 @@ class HomeViewModel @ViewModelInject constructor(private val mainRepository: Mai
 
 
 
-   fun setUpCategories(){
+
+
+    fun setUpCategories(){
        val categoriesData = ArrayList<Categories>()
        categoriesData.add(Categories("Men",null))
        categoriesData.add(Categories("Women",null))

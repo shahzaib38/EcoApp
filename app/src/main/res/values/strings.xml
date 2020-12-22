@@ -167,5 +167,6 @@
     <string name="validphone">must Provide Valid Phone Number</string>
     <string name="fullyQualifeddName">provide Full Name</string>
     <string name="full_address">provide Full Address</string>
+    <string name="section_see_all">show More</string>
 
 </resources>

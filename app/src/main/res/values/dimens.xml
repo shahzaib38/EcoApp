@@ -4,5 +4,6 @@
     <dimen name="element_space">8dp</dimen>
     <dimen name="content_space">16dp</dimen>
     <dimen name="default_image_size" >100dp</dimen>
-
+    <dimen name="item_decoration_space">18dp</dimen>
+    <dimen name="recycler_divider_space">6dp</dimen>
 </resources>

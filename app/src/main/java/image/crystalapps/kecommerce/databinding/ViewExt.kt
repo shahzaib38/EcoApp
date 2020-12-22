@@ -35,30 +35,30 @@ fun View.snackBarSetup(lifecycleOwner: LifecycleOwner, snackBarEvent :LiveData<E
 
 fun View.showSnackBar(snackBarText :String ,length :Int){
     Snackbar.make(this ,snackBarText ,length).show() }
-
-@BindingAdapter("updateProfileContent")
-fun View.setProfileContent(userProfile : UserProfile?)
-{
-
-    Toast.makeText(this.context ,"Testing" ,Toast.LENGTH_LONG).show()
-
-    val image = profile_image
-    val  text =profile_text
-    if (userProfile!=null){
-        image.run {
-            Glide.with(context).load(userProfile.userImageUrl).into(this) }
-        text.run {
-            this.text =userProfile.username }
-    }else{
-        image.run {
-                Glide.with(context).load(R.drawable.default_profile).into(this) }
-        text.run {
-            this.text = resources.getString(R.string.user_name) }
-
-
-    }
-
-}
+//
+//@BindingAdapter("updateProfileContent")
+//fun View.setProfileContent(userProfile : UserProfile?)
+//{
+//
+//    Toast.makeText(this.context ,"Testing" ,Toast.LENGTH_LONG).show()
+//
+//    val image = profile_image
+//    val  text =profile_text
+//    if (userProfile!=null){
+//        image.run {
+//            Glide.with(context).load(userProfile.userImageUrl).into(this) }
+//        text.run {
+//            this.text =userProfile.username }
+//    }else{
+//        image.run {
+//                Glide.with(context).load(R.drawable.default_profile).into(this) }
+//        text.run {
+//            this.text = resources.getString(R.string.user_name) }
+//
+//
+//    }
+//
+//}
 
 
 @BindingAdapter("setImageUrl")

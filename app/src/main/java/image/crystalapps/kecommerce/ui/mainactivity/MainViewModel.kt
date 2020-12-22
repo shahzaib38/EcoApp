@@ -3,7 +3,13 @@ package image.crystalapps.kecommerce.ui.mainactivity
 import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
+import androidx.paging.cachedIn
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.data.Event
@@ -18,6 +24,24 @@ class MainViewModel @ViewModelInject constructor(val mainRepository : MainReposi
     BaseViewModel<MainNavigator>(mainRepository) {
 
 
+    val _CheckUserAvailibility =MutableLiveData<FirebaseUser>()
+     val checkUserAvailibility =_CheckUserAvailibility
+
+
+
+    val mUpdateEvent1 =MutableLiveData<Boolean>(false)
+
+
+    val all =mUpdateEvent1.switchMap {
+
+        val c =   Firebase.firestore.collection("Fashion List").document("Men")
+            .collection("Products").orderBy("productPrice").limit(20).startAfter(20)
+        mainRepository.getData(c).distinctUntilChanged().switchMap {data->
+            filterData(data)
+
+        }
+
+    }
 
     val mUserProfileUpdate = MutableLiveData<UserProfile>()
     val mUpdateEvent = MutableLiveData<Boolean>(false)
@@ -72,36 +96,36 @@ class MainViewModel @ViewModelInject constructor(val mainRepository : MainReposi
     }
 
 
-
-
-
-   private fun filterData(data : Result<List<Products>>) : LiveData<List<Products>> {
+    private fun filterData(data : Result<List<Products>>) : LiveData<List<Products>> {
         val result =MutableLiveData< List<Products>>()
 
-    //    if (data==null){
-    //        println("data is null")
+        //    if (data==null){
+        //        println("data is null")
 
-   //     }
-
-
-    //   result.postValue(data.data)
-   //    data?.run {
+        //     }
 
 
-           if (data is Result.Success) {
-               println("Success")
+        //   result.postValue(data.data)
+        //    data?.run {
+
+
+        if (data is Result.Success) {
+            println("Success")
             //   viewModelScope.launch {
-                   result.value = data.data
-               }
-   //        }
+            result.value = data.data
+        }
+        //        }
 //
 //           if (data is Result.Error) {
 //               println("Error is cominng")
 //           }
 
-  //     }
+        //     }
         return result
     }
+
+
+
 
     fun setValue(value :String){
         viewModelScope.launch {

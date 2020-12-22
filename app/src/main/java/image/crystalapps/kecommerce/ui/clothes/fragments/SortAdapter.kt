@@ -8,9 +8,9 @@ import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.adapter.BaseAdapter
 import image.crystalapps.kecommerce.databinding.SortItemDataBinding
 import image.crystalapps.kecommerce.model.Sort
-import image.crystalapps.kecommerce.utils.OnItemClickListener
+import image.crystalapps.kecommerce.listeners.OnItemClickListener
 
-class SortAdapter(private val itemClickListener: OnItemClickListener<Sort> ,diffUtil: DiffUtil.ItemCallback<Sort>) :BaseAdapter<Sort, SortItemDataBinding>(diffUtil) {
+class SortAdapter(private val itemClickListener: OnItemClickListener<Sort>, diffUtil: DiffUtil.ItemCallback<Sort>) :BaseAdapter<Sort, SortItemDataBinding>(diffUtil) {
 
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int):

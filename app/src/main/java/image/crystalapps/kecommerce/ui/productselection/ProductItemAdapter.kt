@@ -1,7 +1,6 @@
 package image.crystalapps.kecommerce.ui.productselection
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -10,10 +9,7 @@ import image.crystalapps.kecommerce.R
 import image.crystalapps.kecommerce.adapter.BaseAdapter
 import image.crystalapps.kecommerce.databinding.ItemNameDataBinding
 import image.crystalapps.kecommerce.databinding.ProductItemDataBinding
-import image.crystalapps.kecommerce.model.BaseItem
 import image.crystalapps.kecommerce.model.Sizes
-import image.crystalapps.kecommerce.utils.OnItemClickListener
-import kotlinx.android.synthetic.main.product_sizes.view.*
 
 class ProductItemAdapter(diffUtil: DiffUtil.ItemCallback<Sizes>) :BaseAdapter<Sizes,ViewDataBinding>(diffUtil)  {
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int):

@@ -67,6 +67,10 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
 
     mFirebaseAuth =   Firebase.auth
 
+        mFirebaseAuthenticationDialogBinding?.authinclude?.signoutauth?.setOnClickListener {
+            mFirebaseAuth.signOut()
+
+        }
     }
 
     companion object{
@@ -91,7 +95,12 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
     override fun setGoogleAuth(firebaseAuth: FirebaseAuth?) {
         mMainActivity.setGoogleAuth(firebaseAuth) }
 
-  private fun  showNetworkDialog(){
+    override fun signOut() {
+
+        mFirebaseAuth.signOut()
+    }
+
+    private fun  showNetworkDialog(){
       InternetManagerDialogFragment.getInstance().showDialog(requireActivity().supportFragmentManager) }
 
 
@@ -111,7 +120,6 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -119,6 +127,7 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
                 val account = task.getResult(ApiException::class.java)!!
           //      Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
+
             } catch (e: ApiException) {
 //                 Google Sign In failed, update UI appropriately
 //                Log.w(TAG, "Google sign in failed", e)
@@ -134,7 +143,7 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
     //Firebase Auth With Google
     private fun firebaseAuthWithGoogle(idToken: String) {
         // [START_EXCLUDE silent]
-  //      showProgressBar()
+        mViewModel.setProgressBarVisibility(true)
         // [END_EXCLUDE]
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mFirebaseAuth.signInWithCredential(credential)
@@ -144,12 +153,15 @@ class LogInDialogFragment : BaseDialogFragment<LogInViewModel, LoginDialogBindin
                  //   Log.d(TAG, "signInWithCredential:success")
                //     val user = auth.currentUser
                 //    updateUI(mFirebaseAuth)
+                    mViewModel.setProgressBarVisibility(false)
 
                     getViewModel().googleAuth(mFirebaseAuth)
 
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    mViewModel.setProgressBarVisibility(false)
+
                     // [START_EXCLUDE]
                  //   val view = binding.mainLayout
                     // [END_EXCLUDE]

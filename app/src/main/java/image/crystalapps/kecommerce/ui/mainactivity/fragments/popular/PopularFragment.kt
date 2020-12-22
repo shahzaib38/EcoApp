@@ -20,12 +20,17 @@ import image.crystalapps.kecommerce.model.Products
 import image.crystalapps.kecommerce.model.ProductsDetails
 import image.crystalapps.kecommerce.model.Sizes
 import image.crystalapps.kecommerce.ui.base.BaseFragment
+import image.crystalapps.kecommerce.ui.base.recyclerview.GridSpaceDecoration
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.HomeAdapter
 import image.crystalapps.kecommerce.ui.mainactivity.fragments.home.InnerAdapter
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
 class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
+
+    companion object {
+        private const val SPAN_COUNT = 2 }
 
    private val mViewModel by viewModels<PopularViewModel>()
 
@@ -55,8 +60,6 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
 
 
    private fun setUpRecyclerView(){
-
-
        val list1 =ArrayList<Products>()
        list1.add(getProducts())
        list1.add(getProducts())
@@ -66,16 +69,19 @@ class PopularFragment :BaseFragment<PopularViewModel , PopularDataBinding>() {
        val list =ArrayList<Clothes>()
        list.add(clothes)
 
-
-       visibilityListener?.changeVisibility(list1.isNotEmpty())
-
+       visibilityListener?.changeVisibility(list.isNotEmpty())
    //    mViewModel.allProductsLiveData.observe(viewLifecycleOwner , Observer {list1->
+
 
        val clothesAdapter = InnerAdapter(mClothItemCallBack)
        clothesAdapter.submitList(list1)
        mPopularDataBinding?.popularRecyclerView?.run {
            this.layoutManager = LinearLayoutManager(requireContext() ,LinearLayoutManager.HORIZONTAL,false)
            this.adapter = clothesAdapter
+           this.addItemDecoration(
+               GridSpaceDecoration(
+               resources.getDimensionPixelSize(R.dimen.recycler_divider_space), SPAN_COUNT)
+           )
        }
 
      //  })

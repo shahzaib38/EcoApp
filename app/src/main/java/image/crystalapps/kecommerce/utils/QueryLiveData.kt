@@ -29,7 +29,6 @@ class QueryLiveData<M : Model>(val query: Query, val type : Class<M>) :LiveData<
             println("Wokring Firebase ")
 
             value =Result.Success(createList(querySnapShot.documents))
-
         }
     }
 

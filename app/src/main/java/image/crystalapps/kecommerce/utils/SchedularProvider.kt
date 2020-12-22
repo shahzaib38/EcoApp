@@ -1,4 +1,4 @@
-package image.crystalapps.kecommerce.utils.rx
+package image.crystalapps.kecommerce.utils
 
 import io.reactivex.rxjava3.core.Scheduler
 

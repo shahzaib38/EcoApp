@@ -16,22 +16,34 @@ class LogInViewModel @ViewModelInject constructor(val mainRepository : MainRepos
     val _snackBarText = MutableLiveData<Event<Int>>()
     val snackBarText =_snackBarText
 
+    val _progressBar =MutableLiveData<Boolean>(false)
+    val progressBar =_progressBar
+
 
    private val _dataLoading =MutableLiveData<Boolean>()
     val dataLoading =_dataLoading
 
 
 
+  fun  signOut(){
+
+      getNavigator().signOut()
+  }
 
 
-    private fun showSnackBar(message :Int){
+     fun showSnackBar(message :Int){
         _snackBarText.value= Event(message)}
+
+    fun setProgressBarVisibility(boolean: Boolean){
+        _progressBar.value=boolean }
+
 
     fun close(){
         getNavigator().dismissDialog()
     }
 
     fun signIn(){
+
         getNavigator().signIn()
     }
 

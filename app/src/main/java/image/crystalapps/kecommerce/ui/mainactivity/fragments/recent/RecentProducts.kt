@@ -62,7 +62,7 @@ class RecentProducts  :BaseFragment<RecentProductViewModel , RecentProductDataBi
         val list =ArrayList<Clothes>()
         list.add(clothes)
 
-        visibilityListener?.changeVisibility(true)
+        visibilityListener?.changeVisibility(list.isNotEmpty())
 
 
     //    mViewModel.allProductsLiveData.observe(viewLifecycleOwner , Observer {list1->
